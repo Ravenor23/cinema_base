@@ -22,11 +22,11 @@ public class Movie {
     private String dataRelease;
 
     @Column(name = "rars")  // возрастная классификация информационной продукции в России
-    private int rars;
+    private Integer rars;
 
     @Column(name = "mpaa")  // система рейтингов Американской киноассоциации
 
-    private double mpaa;
+    private Double mpaa;
 
     @Column(name = "time") // продолжительность фильма
     private String time;
