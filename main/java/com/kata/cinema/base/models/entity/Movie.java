@@ -65,11 +65,11 @@ public class Movie {
 //            joinColumns = @JoinColumn(name = "movie_id"))
 //    private List<AwardsCeremonyResult> awardsCeremonyResults;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     private List<Content> contents;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     private List<Score> scores;
 
