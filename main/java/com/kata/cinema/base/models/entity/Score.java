@@ -42,6 +42,7 @@ public class Score {
                 ", movieId='" + movieId + '\'' +
                 ", userId='" + userId + '\'' +
                 ", score='" + score + '\'' +
+                ", movie=" + movie +
                 '}';
     }
 }
