@@ -1,9 +1,15 @@
 package com.kata.cinema.base.models.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 @Table(name = "content")
 public class Content {
 
@@ -20,66 +26,12 @@ public class Content {
     @Column(name = "type")
     private String type;
 
-    public Content(long id, int movieId, String contentUrl, String type) {
-        this.id = id;
-        this.movieId = movieId;
-        this.contentUrl = contentUrl;
-        this.type = type;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public int getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
-
-    public String getContentUrl() {
-        return contentUrl;
-    }
-
-    public void setContentUrl(String contentUrl) {
-        this.contentUrl = contentUrl;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Content() {
-        super();
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Movie movie;
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Content content = (Content) o;
-        return id == content.id && movieId == content.movieId && Objects.equals(contentUrl, content.contentUrl)
-                && Objects.equals(type, content.type);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, movieId, contentUrl, type);
     }
 
     @Override
@@ -89,6 +41,7 @@ public class Content {
                 ", movieId=" + movieId +
                 ", contentUrl='" + contentUrl + '\'' +
                 ", type='" + type + '\'' +
+                ", movie=" + movie +
                 '}';
     }
 }
