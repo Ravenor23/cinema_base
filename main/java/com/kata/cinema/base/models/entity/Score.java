@@ -10,7 +10,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Table(name = "score")
 public class Score {
 
@@ -33,6 +32,19 @@ public class Score {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Score score1 = (Score) o;
+        return id == score1.id && Objects.equals(movieId, score1.movieId) && Objects.equals(userId, score1.userId) && Objects.equals(score, score1.score) && Objects.equals(movie, score1.movie);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, movieId, userId, score, movie);
     }
 
     @Override

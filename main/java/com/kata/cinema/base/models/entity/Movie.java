@@ -11,7 +11,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Table(name = "movies")
 public class Movie {
 
@@ -88,6 +87,19 @@ public class Movie {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return id == movie.id && Objects.equals(name, movie.name) && Objects.equals(countries, movie.countries) && Objects.equals(dataRelease, movie.dataRelease) && Objects.equals(rars, movie.rars) && Objects.equals(mpaa, movie.mpaa) && Objects.equals(time, movie.time) && Objects.equals(description, movie.description) && Objects.equals(type, movie.type) && Objects.equals(originName, movie.originName) && Objects.equals(contents, movie.contents) && Objects.equals(scores, movie.scores) && Objects.equals(collections, movie.collections) && Objects.equals(movieId, movie.movieId) && Objects.equals(news, movie.news) && Objects.equals(foldersMovies, movie.foldersMovies) && Objects.equals(persons, movie.persons) && Objects.equals(awardsCeremonyResults, movie.awardsCeremonyResults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, countries, dataRelease, rars, mpaa, time, description, type, originName, contents, scores, collections, movieId, news, foldersMovies, persons, awardsCeremonyResults);
     }
 
     @Override
