@@ -4,20 +4,20 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "score") // таблица отвечающая за оценку пользователей на фильм
+@Table(name = "score")
 public class Score {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(name = "movie_id") // уникальный идентификатор фильма
+    @Column(name = "movie_id")
     private String movieId;
 
-    @Column(name = "user_id") // уникальный идентификатор пользователя
+    @Column(name = "user_id")
     private String userId;
 
-    @Column(name = "score")  // оценка
+    @Column(name = "score")
     private String score;
 
     public Score(long id, String movieId, String userId, String score) {

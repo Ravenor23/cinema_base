@@ -4,20 +4,20 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "content")  // таблица отвечающая за хранение путей к превьюшкам, кадрам, трейлерам фильмов
+@Table(name = "content")
 public class Content {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(name = "movie_id") //  идентификатор фильма
+    @Column(name = "movie_id")
     private int movieId;
 
-    @Column(name = "content_url") //путь к контенту
+    @Column(name = "content_url")
     private String contentUrl;
 
-    @Column(name = "type") // тип, может принимать следующие значения MOVIES, SERIALS, PREVIEW, FRAME, TRAILER
+    @Column(name = "type")
     private String type;
 
     public Content(long id, int movieId, String contentUrl, String type) {
@@ -73,7 +73,8 @@ public class Content {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Content content = (Content) o;
-        return id == content.id && movieId == content.movieId && Objects.equals(contentUrl, content.contentUrl) && Objects.equals(type, content.type);
+        return id == content.id && movieId == content.movieId && Objects.equals(contentUrl, content.contentUrl)
+                && Objects.equals(type, content.type);
     }
 
     @Override

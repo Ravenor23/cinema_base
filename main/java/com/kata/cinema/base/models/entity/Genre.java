@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "genres") // таблица отвечающая за жанры фильмов
+@Table(name = "genres")
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(name = "name")  // имя жанра
+    @Column(name = "name")
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY)

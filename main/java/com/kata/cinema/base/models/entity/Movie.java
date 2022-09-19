@@ -5,39 +5,39 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "movies") // таблица отвечающая за фильмы/сериалы
+@Table(name = "movies")
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(name = "name") // наименование
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "countries") // страны производства
+    @Column(name = "countries")
     private String countries;
 
-    @Column(name = "data_release") // дата выхода
+    @Column(name = "data_release")
     private String dataRelease;
 
-    @Column(name = "rars")  // возрастная классификация информационной продукции в России
+    @Column(name = "rars")
     private Integer rars;
 
-    @Column(name = "mpaa")  // система рейтингов Американской киноассоциации
+    @Column(name = "mpaa")
 
     private Double mpaa;
 
-    @Column(name = "time") // продолжительность фильма
+    @Column(name = "time")
     private String time;
 
-    @Column(name = "description") // описание фильма
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "type") // тип сериал/фильм, принимает следующее значение MOVIES, SERIALS
+    @Column(name = "type")
     private String type;
 
-    @Column(name = "origin_name")  // оригинальное наименование фильма
+    @Column(name = "origin_name")
     private String originName;
 
     @OneToMany(fetch = FetchType.LAZY)

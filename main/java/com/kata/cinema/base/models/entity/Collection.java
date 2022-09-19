@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "collections") // подборки фильмов
+@Table(name = "collections")
 public class Collection {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(name = "name") // наименование подборки
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "enable") //  отвечает за отображение подборки
+    @Column(name = "enable")
     private String enable;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -76,7 +76,8 @@ public class Collection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Collection that = (Collection) o;
-        return id == that.id && Objects.equals(name, that.name) && Objects.equals(enable, that.enable) && Objects.equals(movies, that.movies);
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(enable, that.enable)
+                && Objects.equals(movies, that.movies);
     }
 
     @Override
