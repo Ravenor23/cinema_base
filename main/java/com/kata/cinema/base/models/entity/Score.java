@@ -27,6 +27,9 @@ public class Score {
     @Column(name = "score")
     private String score;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Movie movie;
+
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
