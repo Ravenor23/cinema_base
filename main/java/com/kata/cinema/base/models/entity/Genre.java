@@ -15,18 +15,13 @@ public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
     @Override
     public boolean equals(Object o) {

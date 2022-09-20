@@ -16,7 +16,7 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -47,47 +47,48 @@ public class Movie {
     private String originName;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "content")
     private List<Content> contents;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "score")
     private List<Score> scores;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "collection_movie",
-            joinColumns = @JoinColumn(name = "movie_id"))
+            joinColumns = @JoinColumn(name = "movie_id"),
+    inverseJoinColumns = @JoinColumn(name = "collection_id"))
     private List<Collection> collections;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movie_genre",
-            joinColumns = @JoinColumn(name = "movie_id"))
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> movieId;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "news_movie",
-            joinColumns = @JoinColumn(name = "movie_id"))
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "news_id"))
     private List<Genre> news;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "folder_movies_to_movie",
-            joinColumns = @JoinColumn(name = "movies_id"))
+            joinColumns = @JoinColumn(name = "movies_id"),
+            inverseJoinColumns = @JoinColumn(name = "folder_id"))
     private List<FoldersMovie> foldersMovies;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "movie_person",
-            joinColumns = @JoinColumn(name = "movie_id"))
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id"))
     private List<Person> persons;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "awards_ceremony_result",
-            joinColumns = @JoinColumn(name = "movie_id"))
-    private List<AwardsCeremonyResult> awardsCeremonyResults;
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
+            joinColumns = @JoinColumn(name = "awards_ceremony_id"),
+            inverseJoinColumns = @JoinColumn(name = "news_id"))
+    private List<AwardsCeremony> awardsCeremony;
 
     @Override
     public boolean equals(Object o) {
@@ -122,7 +123,7 @@ public class Movie {
                 ", news=" + news +
                 ", foldersMovies=" + foldersMovies +
                 ", persons=" + persons +
-                ", awardsCeremonyResults=" + awardsCeremonyResults +
+                ", awardsCeremonyResults=" + awardsCeremony +
                 '}';
     }
 }

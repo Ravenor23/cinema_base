@@ -16,23 +16,18 @@ public class Collection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "enable")
-    private String enable;
+    private Boolean enable;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "collection_movie",
             joinColumns = @JoinColumn(name = "collection_id"))
     private List<Movie> movies;
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -52,7 +47,7 @@ public class Collection {
         return "Collection{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", enable='" + enable + '\'' +
+                ", enable=" + enable +
                 ", movies=" + movies +
                 '}';
     }

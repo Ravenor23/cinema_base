@@ -15,7 +15,7 @@ public class Content {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
 
     @Column(name = "movie_id")
     private int movieId;
@@ -28,11 +28,6 @@ public class Content {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
     @Override
     public boolean equals(Object o) {
