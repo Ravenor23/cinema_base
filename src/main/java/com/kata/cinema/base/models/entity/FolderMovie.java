@@ -13,35 +13,25 @@ import javax.persistence.*;
 @Table(name = "folders_movies")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class FolderMovie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     private Long id;
 
-    @Getter
-    @Setter
     private String name;
 
-    @Getter
-    @Setter
     private String description;
 
-    @Getter
-    @Setter
     @Enumerated(EnumType.ORDINAL)
     private Privacy privacy;
 
-    @Getter
-    @Setter
     @Enumerated(EnumType.STRING)
     private Category category;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @Getter
-    @Setter
     private User user;
 }

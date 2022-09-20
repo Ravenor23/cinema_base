@@ -12,34 +12,25 @@ import javax.persistence.*;
 @Table(name = "news")
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 public class News {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter
-    @Getter
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Setter
-    @Getter
     private String data;
 
-    @Setter
-    @Getter
     private String title;
 
-    @Setter
-    @Getter
-    private String html_body;
+    @Column(name = "html_body")
+    private String htmlBody;
 
     @Enumerated(value = EnumType.STRING)
-    @Setter
-    @Getter
     private Rubric rubric;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @Setter
-    @Getter
     private User user;
 }

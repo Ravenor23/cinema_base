@@ -13,37 +13,27 @@ import java.util.List;
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     private Long id;
 
-    @Getter
-    @Setter
     private String email;
 
-    @Getter
-    @Setter
-    private String first_name;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @Getter
-    @Setter
-    private String last_name;
+    @Column(name = "last_name")
+    private String lastName;
 
-    @Getter
-    @Setter
     private String password;
 
-    @Getter
-    @Setter
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    @Getter
-    @Setter
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Role> role_id;
 }

@@ -11,16 +11,15 @@ import javax.persistence.*;
 @Table(name = "user_avatar")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class UserAvatar {
 
     @Id
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    @Getter
-    @Setter
     private User user;
 
-    @Getter
-    @Setter
-    private String avatar_url;
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 }

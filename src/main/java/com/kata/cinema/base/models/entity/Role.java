@@ -11,15 +11,13 @@ import javax.persistence.*;
 @Table(name = "roles")
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     private Long id;
 
-    @Getter
-    @Setter
     private String name;
 }
