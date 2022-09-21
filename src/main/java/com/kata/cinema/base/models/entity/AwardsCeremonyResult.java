@@ -1,45 +1,39 @@
 package com.kata.cinema.base.models.entity;
 
 import lombok.*;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @EqualsAndHashCode
-@Table(name = "awards_ceremony_result") //результаты церемонии награждения
+@Table(name = "awards_ceremony_result")
 public class AwardsCeremonyResult {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     @Column(name = "person_id")
-    private long personId; // уникальный идентификатор пользователя
+    private Long personId;
 
     @Column(name = "movie_id")
-    private long movieId; // уникальный идентификатор фильма
+    private Long movieId;
 
     @Column(name = "nomination_id")
-    private long nominationId; // уникальный идентификатор номинации
+    private Long nominationId;
 
     @Column(name = "awards_ceremony_id")
-    private long awardsCeremonyId; // уникальный идентификатор церемонии награждения
+    private Long awardsCeremonyId;
 
     @Column(name = "nomination_status")
-    private String nominationStatus; // статус номинации, может принимать следующие параметры: NOMINATED, WINNER
-
-    @OneToMany(mappedBy = "awardsCeremonyResultFromNomination")
-    private Set<Nomination> nominationSet = new HashSet<>();
-
-    @OneToMany(mappedBy = "awardsCeremonyResultFromAwardCeremony")
-    private Set<AwardsCeremony> awardsCeremonySet = new HashSet<>();
-
-// + 2 мапы на person_id и movie_id
+    @Enumerated(EnumType.STRING)
+    private String nominationStatus;
 }

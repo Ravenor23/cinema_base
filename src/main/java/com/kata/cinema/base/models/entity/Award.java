@@ -3,27 +3,26 @@ package com.kata.cinema.base.models.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @EqualsAndHashCode
-@Table (name = "awards") // награда
+@Table(name = "awards")
 public class Award {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "name")
-    private String name; // название (к примеру, золотой глобус, оскар, сезар и т.д.)
-
-    @Column(name = "description")
-    private String description; // описание награды !!! В ReadMe нет описания данного поля
-
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name= "award_id", referencedColumnName = "id")
+    @JoinColumn(name = "award_id", referencedColumnName = "id")
     private AwardsCeremony awardsCeremony;
+
+    private String name;
+
+    private String description;
+
 }
