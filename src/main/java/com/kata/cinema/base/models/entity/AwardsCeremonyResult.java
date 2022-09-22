@@ -22,16 +22,21 @@ public class AwardsCeremonyResult {
     private Long id;
 
     @Column(name = "person_id")
+
     private Long personId;
 
     @Column(name = "movie_id")
     private Long movieId;
 
     @Column(name = "nomination_id")
-    private Long nominationId;
+    @OneToMany
+    @JoinColumn(name = "id", referencedColumnName = "nomination_id")
+    private Set<Nomination> nominationId;
 
     @Column(name = "awards_ceremony_id")
-    private Long awardsCeremonyId;
+    @OneToMany
+    @JoinColumn(name = "id", referencedColumnName = "awards_ceremony_id")
+    private Set<AwardsCeremony> awardsCeremonyId;
 
     @Column(name = "nomination_status")
     @Enumerated(EnumType.STRING)

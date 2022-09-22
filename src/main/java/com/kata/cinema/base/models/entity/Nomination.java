@@ -17,9 +17,7 @@ public class Nomination {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nomination_id", referencedColumnName = "id")
-    private AwardsCeremonyResult awardsCeremonyResultFromNomination;
+    private Long id;
 
     private String name;
 }

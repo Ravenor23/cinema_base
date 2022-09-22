@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -19,9 +18,7 @@ public class AwardsCeremony {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "awards_ceremony_id", referencedColumnName = "id")
-    private AwardsCeremonyResult awardsCeremonyResultFromAwardCeremony;
+    private Long id;
 
     @Column(name = "date_event", unique = true)
     private String dateEvent;
@@ -30,6 +27,7 @@ public class AwardsCeremony {
     private String placeEvent;
 
     @Column(name = "award_id")
-    private Long awardId;
-
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "awards_id")
+    private Set<Award> awardId = new HashSet<>();
 }

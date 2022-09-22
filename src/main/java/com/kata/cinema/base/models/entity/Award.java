@@ -17,12 +17,9 @@ public class Award {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "award_id", referencedColumnName = "id")
-    private AwardsCeremony awardsCeremony;
+    private Long id;
 
     private String name;
 
     private String description;
-
 }
