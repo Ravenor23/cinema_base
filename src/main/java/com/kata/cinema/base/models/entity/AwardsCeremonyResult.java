@@ -31,12 +31,12 @@ public class AwardsCeremonyResult {
     @Column(name = "nomination_id")
     @OneToMany
     @JoinColumn(name = "id", referencedColumnName = "nomination_id")
-    private Set<Nomination> nominationId;
+    private Set<Nomination> nominations;
 
     @Column(name = "awards_ceremony_id")
     @OneToMany
     @JoinColumn(name = "id", referencedColumnName = "awards_ceremony_id")
-    private Set<AwardsCeremony> awardsCeremonyId;
+    private Set<AwardsCeremony> awardsCeremonies;
 
     @Column(name = "nomination_status")
     @Enumerated(EnumType.STRING)
