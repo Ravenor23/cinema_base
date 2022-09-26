@@ -72,17 +72,17 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "news_id"))
     private List<Genre> news;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "folder_movies_to_movie",
-            joinColumns = @JoinColumn(name = "movies_id"),
-            inverseJoinColumns = @JoinColumn(name = "folder_id"))
-    private List<FoldersMovie> foldersMovies;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "movie_person",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "person_id"))
-    private List<Person> persons;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "folder_movies_to_movie",
+//            joinColumns = @JoinColumn(name = "movies_id"),
+//            inverseJoinColumns = @JoinColumn(name = "folder_id"))
+//    private List<FoldersMovie> foldersMovies;
+//
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "movie_person",
+//            joinColumns = @JoinColumn(name = "movie_id"),
+//            inverseJoinColumns = @JoinColumn(name = "person_id"))
+//    private List<Person> persons;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "awards_ceremony_result",
@@ -90,18 +90,6 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "news_id"))
     private List<AwardsCeremony> awardsCeremony;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Movie movie = (Movie) o;
-        return id == movie.id && Objects.equals(name, movie.name) && Objects.equals(countries, movie.countries) && Objects.equals(dataRelease, movie.dataRelease) && Objects.equals(rars, movie.rars) && Objects.equals(mpaa, movie.mpaa) && Objects.equals(time, movie.time) && Objects.equals(description, movie.description) && Objects.equals(type, movie.type) && Objects.equals(originName, movie.originName) && Objects.equals(contents, movie.contents) && Objects.equals(scores, movie.scores) && Objects.equals(collections, movie.collections) && Objects.equals(movieId, movie.movieId) && Objects.equals(news, movie.news) && Objects.equals(foldersMovies, movie.foldersMovies) && Objects.equals(persons, movie.persons) && Objects.equals(awardsCeremonyResults, movie.awardsCeremonyResults);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, countries, dataRelease, rars, mpaa, time, description, type, originName, contents, scores, collections, movieId, news, foldersMovies, persons, awardsCeremonyResults);
-    }
 
     @Override
     public String toString() {
@@ -121,8 +109,6 @@ public class Movie {
                 ", collections=" + collections +
                 ", movieId=" + movieId +
                 ", news=" + news +
-                ", foldersMovies=" + foldersMovies +
-                ", persons=" + persons +
                 ", awardsCeremonyResults=" + awardsCeremony +
                 '}';
     }
