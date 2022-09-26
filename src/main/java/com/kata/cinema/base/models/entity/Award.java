@@ -7,23 +7,18 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @EqualsAndHashCode
-@Table (name = "awards") // награда
+@Table(name = "awards")
 public class Award {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
-    @Column(name = "name")
-    private String name; // название (к примеру, золотой глобус, оскар, сезар и т.д.)
+    private String name;
 
-    @Column(name = "description")
-    private String description; // описание награды !!! В ReadMe нет описания данного поля
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name= "award_id", referencedColumnName = "id")
-    private AwardsCeremony awardsCeremony;
+    private String description;
 }

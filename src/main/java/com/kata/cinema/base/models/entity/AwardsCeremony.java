@@ -9,29 +9,25 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @EqualsAndHashCode
-@Table(name = "awards_ceremony") // церемония награждения
+@Table(name = "awards_ceremony")
 public class AwardsCeremony {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     @Column(name = "date_event", unique = true)
-    private String dateEvent; // дата проведения
+    private String dateEvent;
 
     @Column(name = "place_event")
-    private String placeEvent; // место проведения
+    private String placeEvent;
 
     @Column(name = "award_id")
-    private long awardId; // уникальный идентификатор награды
-
-    @OneToMany(mappedBy = "awardsCeremony")
-    private Set<Award> awardSet = new HashSet<>();
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "awards_ceremony_id", referencedColumnName = "id")
-    private AwardsCeremonyResult awardsCeremonyResultFromAwardCeremony;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "awards_id")
+    private Set<Award> awardId = new HashSet<>();
 }

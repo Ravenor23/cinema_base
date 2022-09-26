@@ -7,20 +7,16 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @EqualsAndHashCode
-@Table(name = "nomination") // номинация
+@Table(name = "nomination")
 public class Nomination {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
-    @Column(name = "name")
-    private String name; // название номинации
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nomination_id", referencedColumnName = "id")
-    private AwardsCeremonyResult awardsCeremonyResultFromNomination;
+    private String name;
 }
