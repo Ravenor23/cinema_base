@@ -4,8 +4,6 @@ import com.kata.cinema.base.models.dto.response.GenreResponseDto;
 import com.kata.cinema.base.models.entity.Genre;
 import com.kata.cinema.base.service.dto.impl.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,22 +24,19 @@ public class AdminGenreRestController {
     }
 
     @PostMapping("/api/admin/genres")
-    public String createGenre(@RequestBody GenreResponseDto genreResponseDto) {
+    public void createGenre(@RequestBody GenreResponseDto genreResponseDto) {
         genreService.createGenre(genreResponseDto);
-        return "redirect:/genres";
     }
 
     @PutMapping("/api/admin/genres/{id}")
-    public String updateGenre(@PathVariable long id,@RequestBody GenreResponseDto genreResponseDto) {
+    public void updateGenre(@PathVariable long id,@RequestBody GenreResponseDto genreResponseDto) {
         Genre updateGenre = genreService.findGenreById(id);
         updateGenre.setName(genreResponseDto.getName());
         genreService.createGenre(genreResponseDto);
-        return "redirect:/genres";
     }
 
     @DeleteMapping("/api/admin/genres/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public void delete(@PathVariable("id") Long id) {
         genreService.deleteById(id);
-        return "redirect:/genres";
     }
 }
