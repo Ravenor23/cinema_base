@@ -2,12 +2,11 @@ package com.kata.cinema.base.webapp.controllers.user;
 
 
 import com.kata.cinema.base.models.dto.response.CommentsResponseDto;
-import com.kata.cinema.base.models.entity.Comments;
 import com.kata.cinema.base.service.dto.impl.CommentsService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping
 public class UserNewsRestController {
 
     private final CommentsService commentsService;
