@@ -17,9 +17,6 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "movie_id")
-    private String movieId;
-
     @Column(name = "user_id")
     private String userId;
 
@@ -34,20 +31,18 @@ public class Score {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Score score1 = (Score) o;
-        return id == score1.id && Objects.equals(movieId, score1.movieId) && Objects.equals(userId, score1.userId) && Objects.equals(score, score1.score) && Objects.equals(movie, score1.movie);
+        return Objects.equals(id, score1.id) && Objects.equals(score, score1.score) && Objects.equals(movie, score1.movie);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, movieId, userId, score, movie);
+        return Objects.hash(id, score, movie);
     }
 
     @Override
     public String toString() {
         return "Score{" +
                 "id=" + id +
-                ", movieId='" + movieId + '\'' +
-                ", userId='" + userId + '\'' +
                 ", score='" + score + '\'' +
                 ", movie=" + movie +
                 '}';
