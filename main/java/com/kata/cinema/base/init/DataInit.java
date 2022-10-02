@@ -59,8 +59,17 @@ public class DataInit {
             movie.setMpaa(MPAA.generateRandomMPAA());
             movie.setRars(RARS.generateRandomRARS());
             Collections.shuffle(listGenre);
-            movie.setGenres(listGenre.subList(0, 3));
-            movie.setCollections(listCollection.subList(5, 15));
+            if (i % 2 == 0) {
+                movie.setGenres(listGenre.subList(0, 3));
+            } else {
+                movie.setGenres(listGenre.subList(0, 1));
+            }
+            Collections.shuffle(listCollection);
+            if (i % 2 == 0) {
+                movie.setCollections(listCollection.subList(0, 15));
+            } else {
+                movie.setCollections(listCollection.subList(0, 5));
+            }
             movieService.save(movie);
         }
     }
