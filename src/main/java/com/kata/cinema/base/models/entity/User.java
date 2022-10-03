@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class User {
 
     private String password;
 
-    @Temporal(TemporalType.DATE)
-    private Date birthday;
+    private LocalDate birthday;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Role> role_id;
+    //TODO расписать связь подробней, забенить List на Sey
+    private List<Role> roles;
 }

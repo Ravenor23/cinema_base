@@ -46,6 +46,8 @@ public class Movie {
     @Column(name = "origin_name")
     private String originName;
 
+    //TODO привести сущность в порядок в соотвествии диаграммы, связи делать односторонние, на стороне ...ToOne
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "content")
     private List<Content> contents;

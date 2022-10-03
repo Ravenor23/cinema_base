@@ -1,4 +1,5 @@
 package com.kata.cinema.base.models.entity;
+import com.kata.cinema.base.models.enums.Privacy;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,4 +1,5 @@
 package com.kata.cinema.base.models.entity;
+import com.kata.cinema.base.models.enums.TypeCharacter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,7 +46,7 @@ public class MoviePerson {
     @JoinColumn(name = "movie_id", insertable = false, updatable = false)
     private Movie movie;
 
-    @ManyToMany(cascade = CascadeType.REFRESH)
+    @ManyToMany
     @JoinTable(name = "movie_person_to_profession",
             joinColumns = {@JoinColumn(name = "movie_id", insertable = false, updatable = false),
                     @JoinColumn(name = "person_id", insertable = false, updatable = false)},
