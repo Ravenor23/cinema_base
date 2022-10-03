@@ -16,17 +16,17 @@ public class Comments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id;
+    private Long id;
 
     private String text;
 
     private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    User user;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    News news;
+    private News news;
 
     @Override
     public String toString() {

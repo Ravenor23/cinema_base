@@ -18,6 +18,6 @@ public class NewsRestController {
 
     @GetMapping("/api/news/{id}/comments")
     public List<CommentsResponseDto> getCommentsByDate(@PathVariable("id") Long id) {
-        return commentsService.getAllCommentsByDate();
+        return commentsService.getCommentsByDate(id);
     }
 }
