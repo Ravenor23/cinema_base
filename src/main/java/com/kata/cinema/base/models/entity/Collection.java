@@ -12,10 +12,14 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "collections")
+@ToString
 public class Collection {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "col_seq")
+    @SequenceGenerator(name = "col_seq",
+            sequenceName = "col_sequence",
+            initialValue = 1, allocationSize = 1000)
     private Long id;
 
     @Column(name = "name")
@@ -24,6 +28,7 @@ public class Collection {
     @Column(name = "enable")
     private Boolean enable;
 
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "collection_movie",
             joinColumns = @JoinColumn(name = "collection_id"))
@@ -34,21 +39,12 @@ public class Collection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Collection that = (Collection) o;
-        return id == that.id && Objects.equals(name, that.name) && Objects.equals(enable, that.enable) && Objects.equals(movies, that.movies);
+        return id.equals(that.id) && name.equals(that.name) && enable.equals(that.enable);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, enable, movies);
+        return getClass().hashCode();
     }
 
-    @Override
-    public String toString() {
-        return "Collection{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", enable=" + enable +
-                ", movies=" + movies +
-                '}';
-    }
 }
