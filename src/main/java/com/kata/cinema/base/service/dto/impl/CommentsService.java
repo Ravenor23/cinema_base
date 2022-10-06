@@ -22,8 +22,12 @@ public class CommentsService {
         this.commentsRepository = commentsRepository;
     }
 
-    public List<CommentsResponseDto> getCommentsByDate(Long id) {
+    public List<CommentsResponseDto> getAllCommentsByDate(Long id) {
         return commentsMapper.modelsToDTO(commentsRepository.findAll(Sort.by(Sort.Direction.DESC, "date")));
+    }
+
+    public List<CommentsResponseDto> getCommentsByDate(Long id) {
+        return commentsMapper.modelsToDTO(commentsRepository.findListCommentsByNewsId(id));
     }
 
     public void createComment(CommentsResponseDto commentsResponseDto) {
