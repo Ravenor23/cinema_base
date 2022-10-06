@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class ProductionStudioService {
 
     private final ProductionStudioRepository productionStudioRepository;
@@ -18,6 +17,7 @@ public class ProductionStudioService {
         this.productionStudioRepository = productionStudioRepository;
     }
 
+    @Transactional
     public void saveProductionStudio(ProductionStudioRequestDto productionStudioRequestDto) {
         ProductionStudio productionStudio = new ProductionStudio();
         productionStudio.setName(productionStudioRequestDto.getName());
@@ -26,10 +26,12 @@ public class ProductionStudioService {
         productionStudioRepository.save(productionStudio);
     }
 
+    @Transactional
     public void deleteProductionStudio(Long id) {
         productionStudioRepository.deleteById(id);
     }
 
+    @Transactional
     public void updateProductionStudio(Long id, ProductionStudioRequestDto productionStudioRequestDto) {
         ProductionStudio updateProductionStudio = productionStudioRepository.getById(id);
         updateProductionStudio.setName(productionStudioRequestDto.getName());

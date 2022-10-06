@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/admin/studios")
 public class AdminProductionStudioRestController {
 
     private final ProductionStudioService productionStudioService;
@@ -15,17 +16,17 @@ public class AdminProductionStudioRestController {
         this.productionStudioService = productionStudioService;
     }
 
-    @PostMapping("/api/admin/studios")
+    @PostMapping
     public void saveProductionStudio(@RequestBody ProductionStudioRequestDto productionStudioRequestDto) {
         productionStudioService.saveProductionStudio(productionStudioRequestDto);
     }
 
-    @DeleteMapping("/api/admin/studios/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProductionStudio(@PathVariable("id") Long id) {
         productionStudioService.deleteProductionStudio(id);
     }
 
-    @PutMapping("/api/admin/studios/{id}")
+    @PutMapping("/{id}")
     public void updateProductionStudio(@PathVariable("id") Long id,
                                        @RequestBody ProductionStudioRequestDto productionStudioRequestDto) {
         productionStudioService.updateProductionStudio(id, productionStudioRequestDto);
