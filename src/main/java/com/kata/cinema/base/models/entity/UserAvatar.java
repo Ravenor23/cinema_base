@@ -1,11 +1,9 @@
 package com.kata.cinema.base.models.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user_avatar")
@@ -13,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class UserAvatar {
 
     @Id
@@ -22,4 +21,17 @@ public class UserAvatar {
 
     @Column(name = "avatar_url")
     private String avatarUrl;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserAvatar that = (UserAvatar) o;
+        return avatarUrl.equals(that.avatarUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
