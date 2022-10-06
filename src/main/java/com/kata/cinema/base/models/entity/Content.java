@@ -21,9 +21,6 @@ public class Content {
             initialValue = 1, allocationSize = 100)
     private Long id;
 
-    @Column(name = "movie_id")
-    private int movieId;
-
     @Column(name = "content_url")
     private String contentUrl;
 

@@ -30,9 +30,7 @@ public class AwardsCeremony {
     private String placeEvent;
 
     @ToString.Exclude
-    @Column(name = "award_id")
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "awards_id")
     private Set<Award> awardId = new HashSet<>();
 
     @Override

@@ -31,19 +31,14 @@ public class AwardsCeremonyResult {
     private Long movieId;
 
     @ToString.Exclude
-    @Column(name = "nomination_id")
     @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "nomination_id")
     private Set<Nomination> nominations;
 
     @ToString.Exclude
-    @Column(name = "awards_ceremony_id")
     @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "awards_ceremony_id")
     private Set<AwardsCeremony> awardsCeremonies;
 
     @Column(name = "nomination_status")
-    @Enumerated(EnumType.STRING)
     private String nominationStatus;
 
     @Override
