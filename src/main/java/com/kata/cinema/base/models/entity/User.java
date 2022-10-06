@@ -1,13 +1,13 @@
 package com.kata.cinema.base.models.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -15,10 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "us_seq")
+    @SequenceGenerator(name = "us_seq",
+            sequenceName = "us_sequence",
+            initialValue = 1, allocationSize = 3000)
     private Long id;
 
     private String email;
@@ -31,9 +35,26 @@ public class User {
 
     private String password;
 
-    @Temporal(TemporalType.DATE)
-    private Date birthday;
+    private LocalDate birthday;
 
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Role> role_id;
+    @JoinTable(name = "users_roles",
+              joinColumns = {@JoinColumn(name = "user_id")},
+    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User that = (User) o;
+        return id.equals(that.id) && email.equals(that.email) && firstName.equals(that.firstName) && lastName.equals(that.lastName)
+                && password.equals(that.password) && birthday.equals(that.birthday);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

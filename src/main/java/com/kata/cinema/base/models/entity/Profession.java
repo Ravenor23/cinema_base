@@ -4,35 +4,29 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
-@Entity
-@Table(name = "roles")
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@Setter
 @Getter
-public class Role {
-
+@Setter
+@NoArgsConstructor
+@Entity
+@ToString
+@Table(name = "professions")
+public class Profession {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
-    @SequenceGenerator(name = "role_seq",
-            sequenceName = "role_sequence",
-            initialValue = 1, allocationSize = 10)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prof_seq")
+    @SequenceGenerator(name = "prof_seq",
+            sequenceName = "prof_sequence",
+            initialValue = 1, allocationSize = 100)
     private Long id;
 
+    @Column(name = "name")
     private String name;
-
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "roles")
-    Set<User> users;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Role that = (Role) o;
+        Profession that = (Profession) o;
         return id.equals(that.id) && name.equals(that.name);
     }
 
