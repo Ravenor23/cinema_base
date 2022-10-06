@@ -23,19 +23,22 @@ public class AwardsCeremonyResult {
             initialValue = 1, allocationSize = 30)
     private Long id;
 
+    //TODO сделать нормальную связь с персоной
     @Column(name = "person_id")
-
     private Long personId;
 
+    //TODO сделать нормальную связь с фильмом
     @Column(name = "movie_id")
     private Long movieId;
 
     @ToString.Exclude
     @OneToMany
+    //TODO сделать одностороннию связь с другой стороны
     private Set<Nomination> nominations;
 
     @ToString.Exclude
     @OneToMany
+    //TODO сделать одностороннию связь с другой стороны
     private Set<AwardsCeremony> awardsCeremonies;
 
     @Column(name = "nomination_status")

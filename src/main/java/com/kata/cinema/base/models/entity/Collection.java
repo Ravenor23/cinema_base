@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -28,11 +29,15 @@ public class Collection {
     @Column(name = "enable")
     private Boolean enable;
 
-    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "collection_movie",
-            joinColumns = @JoinColumn(name = "collection_id"))
-    private List<Movie> movies;
+    @JoinTable(
+            name = "collections_movies",
+            joinColumns = @JoinColumn(name = "collections_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "movies_id", referencedColumnName = "id")
+    )
+    @ToString.Exclude
+    private Set<Movie> movies;
 
     @Override
     public boolean equals(Object o) {

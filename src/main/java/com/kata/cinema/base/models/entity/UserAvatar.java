@@ -12,6 +12,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+
+//TODO удалить класс, перенести avatarUrl в сущность User
 public class UserAvatar {
 
     @Id
