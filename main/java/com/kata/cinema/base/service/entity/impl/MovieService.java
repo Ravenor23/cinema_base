@@ -4,5 +4,4 @@ import com.kata.cinema.base.models.entity.Movie;
 
 public interface MovieService {
     void save(Movie movie);
-
 }

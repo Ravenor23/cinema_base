@@ -52,4 +52,5 @@ public class Score {
                 ", movie=" + movie +
                 '}';
     }
+
 }

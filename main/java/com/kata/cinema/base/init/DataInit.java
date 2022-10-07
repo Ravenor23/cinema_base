@@ -84,4 +84,5 @@ public class DataInit {
             movieService.save(movie);
         }
     }
+
 }

@@ -27,5 +27,4 @@ public enum RARS {
     public String toString() {
         return " + translation + ";
     }
-
 }

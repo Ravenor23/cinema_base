@@ -34,7 +34,8 @@ public class Collection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Collection that = (Collection) o;
-        return id == that.id && Objects.equals(name, that.name) && Objects.equals(enable, that.enable) && Objects.equals(movies, that.movies);
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(enable, that.enable)
+                && Objects.equals(movies, that.movies);
     }
 
     @Override
@@ -51,4 +52,5 @@ public class Collection {
                 ", movies=" + movies +
                 '}';
     }
+
 }

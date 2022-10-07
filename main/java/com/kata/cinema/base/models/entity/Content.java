@@ -34,7 +34,8 @@ public class Content {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Content content = (Content) o;
-        return id == content.id && movieId == content.movieId && Objects.equals(contentUrl, content.contentUrl) && Objects.equals(type, content.type) && Objects.equals(movie, content.movie);
+        return id == content.id && movieId == content.movieId && Objects.equals(contentUrl, content.contentUrl)
+                && Objects.equals(type, content.type) && Objects.equals(movie, content.movie);
     }
 
     @Override
