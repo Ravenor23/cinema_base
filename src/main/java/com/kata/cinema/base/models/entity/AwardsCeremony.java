@@ -34,6 +34,10 @@ public class AwardsCeremony {
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Award> awards = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "awards_ceremony_result")
+    private Set<AwardsCeremonyResult> awardsCeremonyResults;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

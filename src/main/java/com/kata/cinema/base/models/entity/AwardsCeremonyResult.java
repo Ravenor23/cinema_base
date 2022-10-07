@@ -37,9 +37,10 @@ public class AwardsCeremonyResult {
     private Set<Nomination> nominations;
 
     @ToString.Exclude
-    @OneToMany
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "awards_ceremony")
     //TODO сделать одностороннию связь с другой стороны
-    private Set<AwardsCeremony> awardsCeremonies;
+    private AwardsCeremony awardsCeremonies;
 
     @Column(name = "nomination_status")
     private String nominationStatus;
