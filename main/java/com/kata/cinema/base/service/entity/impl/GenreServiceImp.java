@@ -16,4 +16,5 @@ public class GenreServiceImp implements GenreService {
     public void save(Genre genre) {
         genreRepository.save(genre);
     }
+
 }

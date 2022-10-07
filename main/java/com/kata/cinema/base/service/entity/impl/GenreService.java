@@ -4,4 +4,5 @@ import com.kata.cinema.base.models.entity.Genre;
 
 public interface GenreService {
     void save(Genre genre);
+
 }

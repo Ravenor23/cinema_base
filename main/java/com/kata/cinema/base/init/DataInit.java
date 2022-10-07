@@ -81,7 +81,6 @@ public class DataInit {
             } else {
                 movie.setCollections(listCollection.subList(0, 5));
             }
-
             movieService.save(movie);
         }
     }

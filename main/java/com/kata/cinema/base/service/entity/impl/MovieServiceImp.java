@@ -16,4 +16,5 @@ public class MovieServiceImp implements MovieService {
     public void save(Movie movie) {
         movieRepository.save(movie);
     }
+
 }

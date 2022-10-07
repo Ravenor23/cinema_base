@@ -26,5 +26,6 @@ public enum MPAA {
     public String toString() {
         return " + translation + ";
     }
+
 }
 
