@@ -26,8 +26,7 @@ public class Collection {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "collection_movie",
-            joinColumns = @JoinColumn(name = "collection_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+            joinColumns = @JoinColumn(name = "collection_id"))
     private List<Movie> movies;
 
     @Override
@@ -35,8 +34,7 @@ public class Collection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Collection that = (Collection) o;
-        return id == that.id && Objects.equals(name, that.name) && Objects.equals(enable, that.enable)
-                && Objects.equals(movies, that.movies);
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(enable, that.enable) && Objects.equals(movies, that.movies);
     }
 
     @Override

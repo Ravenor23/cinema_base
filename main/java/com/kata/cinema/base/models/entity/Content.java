@@ -17,6 +17,9 @@ public class Content {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(name = "movie_id")
+    private int movieId;
+
     @Column(name = "content_url")
     private String contentUrl;
 
@@ -31,19 +34,20 @@ public class Content {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Content content = (Content) o;
-        return Objects.equals(id, content.id) && Objects.equals(type, content.type)
-                && Objects.equals(movie, content.movie);
+        return id == content.id && movieId == content.movieId && Objects.equals(contentUrl, content.contentUrl) && Objects.equals(type, content.type) && Objects.equals(movie, content.movie);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, movie);
+        return Objects.hash(id, movieId, contentUrl, type, movie);
     }
 
     @Override
     public String toString() {
         return "Content{" +
                 "id=" + id +
+                ", movieId=" + movieId +
+                ", contentUrl='" + contentUrl + '\'' +
                 ", type='" + type + '\'' +
                 ", movie=" + movie +
                 '}';

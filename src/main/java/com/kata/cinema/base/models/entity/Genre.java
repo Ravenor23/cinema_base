@@ -3,7 +3,6 @@ package com.kata.cinema.base.models.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,11 +19,9 @@ public class Genre {
 
     @Column(name = "name")
     private String name;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "movie_genre",
-            joinColumns = @JoinColumn(name = "genre_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private List<Movie> movie;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Movie movie;
 
     @Override
     public boolean equals(Object o) {
