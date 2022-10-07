@@ -31,8 +31,9 @@ public class AwardsCeremony {
 
     //TODO сделать одностороннию связь с другой стороны
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Award> awards = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "awards")
+    private Award awards;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "awards_ceremony_result")

@@ -44,6 +44,10 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "profession_id"))
     private Set<Profession> professions;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "awards_ceremony_result")
+    private Set<AwardsCeremonyResult> awardsCeremonyResults;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

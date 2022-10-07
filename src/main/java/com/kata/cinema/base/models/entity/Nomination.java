@@ -21,7 +21,12 @@ public class Nomination {
             initialValue = 1, allocationSize = 60)
     private Long id;
 
+    @Column(name = "name")
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "awards_ceremony_result")
+    private Set<AwardsCeremonyResult> awardsCeremonyResult;
 
     @Override
     public boolean equals(Object o) {
