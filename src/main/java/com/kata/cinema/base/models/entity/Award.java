@@ -27,10 +27,6 @@ public class Award {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "awards_ceremony")
-    private Set<AwardsCeremony> awardsCeremony;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -33,10 +33,6 @@ public class AwardsCeremony {
     @JoinTable(name = "awards")
     private Award awards;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "awards_ceremony_result")
-    private Set<AwardsCeremonyResult> awardsCeremonyResults;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
