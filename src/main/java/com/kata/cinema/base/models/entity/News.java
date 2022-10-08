@@ -22,8 +22,10 @@ public class News {
             initialValue = 1, allocationSize = 5000)
     private Long id;
 
+    @Column(name = "data")
     private String data;
 
+    @Column(name = "title")
     private String title;
 
     @Column(name = "html_body")

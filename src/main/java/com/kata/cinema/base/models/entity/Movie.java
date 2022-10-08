@@ -54,7 +54,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
-    private Set<Genre> genres;
+    private Set<com.kata.cinema.base.models.entity.Genre> genres;
 
     @Override
     public boolean equals(Object o) {
@@ -70,5 +70,6 @@ public class Movie {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }
 

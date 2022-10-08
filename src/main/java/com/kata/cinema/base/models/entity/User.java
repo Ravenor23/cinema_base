@@ -25,6 +25,7 @@ public class User {
             initialValue = 1, allocationSize = 3000)
     private Long id;
 
+    @Column(name = "email")
     private String email;
 
     @Column(name = "first_name")

@@ -12,7 +12,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Table(name = "awards_ceremony_result")
 public class AwardsCeremonyResult {
 
@@ -22,6 +21,10 @@ public class AwardsCeremonyResult {
             sequenceName = "awcr_sequence",
             initialValue = 1, allocationSize = 30)
     private Long id;
+
+    @Column(name = "nomination_status")
+    private String nominationStatus;
+
 
     //TODO сделать нормальную связь с персоной
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,9 +45,6 @@ public class AwardsCeremonyResult {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "awards_ceremony")
     private AwardsCeremony awardsCeremonies;
-
-    @Column(name = "nomination_status")
-    private String nominationStatus;
 
     @Override
     public boolean equals(Object o) {

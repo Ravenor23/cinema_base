@@ -3,9 +3,6 @@ package com.kata.cinema.base.models.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -31,11 +28,10 @@ public class Collection {
 
     @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "collections_movies",
+    @JoinTable(name = "collections_movies",
             joinColumns = @JoinColumn(name = "collections_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "movies_id", referencedColumnName = "id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "movies_id", referencedColumnName = "id"))
+
     @ToString.Exclude
     private Set<Movie> movies;
 

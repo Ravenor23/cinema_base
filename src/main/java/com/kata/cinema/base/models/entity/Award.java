@@ -4,13 +4,13 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Table(name = "awards")
 public class Award {
 
@@ -21,9 +21,15 @@ public class Award {
             initialValue = 1, allocationSize = 20)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
     private String description;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "awards_ceremony")
+    private Set<AwardsCeremony> awardsCeremony;
 
     @Override
     public boolean equals(Object o) {
