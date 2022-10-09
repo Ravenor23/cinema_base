@@ -27,7 +27,7 @@ public class FolderMovie {
 
     private String description;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Privacy privacy;
 
     @Enumerated(EnumType.STRING)

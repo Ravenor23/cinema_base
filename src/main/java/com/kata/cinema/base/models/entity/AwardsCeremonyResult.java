@@ -23,27 +23,25 @@ public class AwardsCeremonyResult {
             initialValue = 1, allocationSize = 30)
     private Long id;
 
+    //TODO сделать нормальную связь с персоной
     @Column(name = "person_id")
-
     private Long personId;
 
+    //TODO сделать нормальную связь с фильмом
     @Column(name = "movie_id")
     private Long movieId;
 
     @ToString.Exclude
-    @Column(name = "nomination_id")
     @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "nomination_id")
+    //TODO сделать одностороннию связь с другой стороны
     private Set<Nomination> nominations;
 
     @ToString.Exclude
-    @Column(name = "awards_ceremony_id")
     @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "awards_ceremony_id")
+    //TODO сделать одностороннию связь с другой стороны
     private Set<AwardsCeremony> awardsCeremonies;
 
     @Column(name = "nomination_status")
-    @Enumerated(EnumType.STRING)
     private String nominationStatus;
 
     @Override

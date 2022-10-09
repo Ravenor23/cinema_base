@@ -46,12 +46,9 @@ public class MoviePerson {
     private Movie movie;
 
     @ToString.Exclude
-    @ManyToMany
-    @JoinTable(name = "movie_person_to_profession",
-            joinColumns = {@JoinColumn(name = "movie_id", insertable = false, updatable = false),
-                    @JoinColumn(name = "person_id", insertable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "profession_id")})
-    private Set<Profession> professions;
+    @ManyToOne(targetEntity = Profession.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "profession_id", insertable = false, updatable = false)
+    private Profession professions;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_character")

@@ -1,5 +1,6 @@
 package com.kata.cinema.base.models.entity;
 
+import com.kata.cinema.base.models.enums.Type;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,14 +22,12 @@ public class Content {
             initialValue = 1, allocationSize = 100)
     private Long id;
 
-    @Column(name = "movie_id")
-    private int movieId;
-
     @Column(name = "content_url")
     private String contentUrl;
 
     @Column(name = "type")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)

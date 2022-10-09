@@ -29,11 +29,10 @@ public class AwardsCeremony {
     @Column(name = "place_event")
     private String placeEvent;
 
+    //TODO сделать одностороннию связь с другой стороны
     @ToString.Exclude
-    @Column(name = "award_id")
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "awards_id")
-    private Set<Award> awardId = new HashSet<>();
+    private Set<Award> awards = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

@@ -29,6 +29,7 @@ public class FolderPerson {
     private User user;
 
     @Column(name = "privacy")
+    @Enumerated(EnumType.STRING)
     private Privacy privacy;
 
     @Column(name = "name")
