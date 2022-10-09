@@ -8,7 +8,8 @@ import java.util.Date;
 
 @RestControllerAdvice
 public class ExceptionRestController extends RuntimeException {
+    @ExceptionHandler
     public ErrorResponse errorResponse(final Exception e) {
-        return new ErrorResponse(Date.from(Instant.now()), e.getMessage(), HttpStatus.MULTI_STATUS, HttpStatus.MULTI_STATUS.value());
+        return new ErrorResponse(Date.from(Instant.now()), e.getMessage());
     }
 }

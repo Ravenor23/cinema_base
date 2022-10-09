@@ -19,5 +19,8 @@ public class ErrorResponse {
 
     private int code;
 
-
+    public ErrorResponse(Date timestamp, String message) {
+        this.timestamp = timestamp;
+        this.message = message;
+    }
 }
