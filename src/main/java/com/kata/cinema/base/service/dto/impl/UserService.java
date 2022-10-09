@@ -23,8 +23,8 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public List<UserResponseDto> findAllByEmail(String email) {
-        return userMapper.toDTOList(userRepository.findAllByEmail(email));
+    public List<UserResponseDto> searchByEmail(String email) {
+        return userMapper.toDTOList(userRepository.findAllByEmailContainingIgnoreCase(email));
     }
 
 }
