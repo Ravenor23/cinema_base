@@ -26,7 +26,7 @@ public class ProductionStudioMovie {
     @JoinColumn(name = "production_studios_id", insertable = false, updatable = false)
     private ProductionStudio studio;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "studio_performances_id")
     private StudioPerformance performance;
 }
