@@ -10,15 +10,21 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "genres")
-public class Genre {
+@Table(name = "score")
+public class Score {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "movie_id")
+    private String movieId;
+
+    @Column(name = "user_id")
+    private String userId;
+
+    @Column(name = "score")
+    private String score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
@@ -27,21 +33,24 @@ public class Genre {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Genre genre = (Genre) o;
-        return id == genre.id && Objects.equals(name, genre.name) && Objects.equals(movie, genre.movie);
+        Score score1 = (Score) o;
+        return id == score1.id && Objects.equals(movieId, score1.movieId) && Objects.equals(userId, score1.userId) && Objects.equals(score, score1.score) && Objects.equals(movie, score1.movie);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, movie);
+        return Objects.hash(id, movieId, userId, score, movie);
     }
 
     @Override
     public String toString() {
-        return "Genre{" +
+        return "Score{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", movieId='" + movieId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", score='" + score + '\'' +
                 ", movie=" + movie +
                 '}';
     }
+
 }
