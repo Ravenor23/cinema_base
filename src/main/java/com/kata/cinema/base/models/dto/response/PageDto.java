@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageDto<T> {
-  Long count;
-  List<T> entities;
+  private Long count;
+  private List<T> entities;
 }
