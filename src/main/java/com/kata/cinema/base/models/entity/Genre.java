@@ -10,21 +10,16 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Table(name = "genres")
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "g_seq")
-    @SequenceGenerator(name = "g_seq",
-            sequenceName = "g_sequence",
-            initialValue = 1, allocationSize = 30)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
 
@@ -32,12 +27,21 @@ public class Genre {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Genre that = (Genre) o;
-        return id.equals(that.id) && name.equals(that.name);
+        Genre genre = (Genre) o;
+        return id == genre.id && Objects.equals(name, genre.name) && Objects.equals(movie, genre.movie);
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id, name, movie);
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", movie=" + movie +
+                '}';
     }
 }

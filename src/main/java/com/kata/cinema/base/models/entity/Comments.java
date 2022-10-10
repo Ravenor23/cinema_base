@@ -18,8 +18,10 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(name = "text")
     private String text;
 
+    @Column(name = "date")
     private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
