@@ -1,8 +1,9 @@
-package com.kata.cinema.base.service.entity.impl;
+package src.src.main.java.com.kata.cinema.base.service.entity.impl;
 
 import com.kata.cinema.base.models.entity.Collection;
-import com.kata.cinema.base.repository.CollectionRepository;
+import src.src.main.java.com.kata.cinema.base.repositories.CollectionRepository;
 import org.springframework.stereotype.Service;
+import src.src.main.java.com.kata.cinema.base.service.entity.impl.CollectionService;
 
 
 @Service

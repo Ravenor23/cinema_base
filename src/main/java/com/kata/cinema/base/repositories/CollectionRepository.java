@@ -1,4 +1,4 @@
-package com.kata.cinema.base.repository;
+package src.src.main.java.com.kata.cinema.base.repositories;
 
 import com.kata.cinema.base.models.entity.Collection;
 import org.springframework.data.jpa.repository.JpaRepository;
