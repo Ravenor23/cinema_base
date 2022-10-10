@@ -1,8 +1,9 @@
-package com.kata.cinema.base.service.entity.impl;
+package src.src.main.java.com.kata.cinema.base.service.entity.impl;
 
 import com.kata.cinema.base.models.entity.Movie;
-import com.kata.cinema.base.repository.MovieRepository;
+import src.src.main.java.com.kata.cinema.base.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
+import src.src.main.java.com.kata.cinema.base.service.entity.impl.MovieService;
 
 @Service
 public class MovieServiceImp implements MovieService {

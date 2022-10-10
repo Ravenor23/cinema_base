@@ -1,4 +1,4 @@
-package com.kata.cinema.base.models.enums;
+package src.src.main.java.com.kata.cinema.base.models.entity;
 
 import lombok.Getter;
 
