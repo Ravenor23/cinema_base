@@ -10,6 +10,6 @@ import java.util.Date;
 public class ExceptionRestController extends RuntimeException {
     @ExceptionHandler
     public ErrorResponse errorResponse(final Exception e) {
-        return new ErrorResponse(Date.from(Instant.now()), e.getMessage());
+        return new ErrorResponse(Date.from(Instant.now()), e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 }
