@@ -22,6 +22,7 @@ public class Role {
             initialValue = 1, allocationSize = 10)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     @ToString.Exclude

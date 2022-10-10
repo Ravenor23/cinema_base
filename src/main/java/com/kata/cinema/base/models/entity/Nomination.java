@@ -21,6 +21,7 @@ public class Nomination {
             initialValue = 1, allocationSize = 60)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     @Override

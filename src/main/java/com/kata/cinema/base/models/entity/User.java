@@ -25,6 +25,7 @@ public class User {
             initialValue = 1, allocationSize = 3000)
     private Long id;
 
+    @Column(name = "email")
     private String email;
 
     @Column(name = "first_name")
@@ -33,9 +34,14 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "birthday")
     private LocalDate birthday;
+
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
