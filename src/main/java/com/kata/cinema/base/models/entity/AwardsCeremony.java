@@ -12,7 +12,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Table(name = "awards_ceremony")
 public class AwardsCeremony {
 
@@ -30,9 +29,9 @@ public class AwardsCeremony {
     private String placeEvent;
 
     //TODO сделать одностороннию связь с другой стороны
-    @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Award> awards = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "awards")
+    private Award awards;
 
     @Override
     public boolean equals(Object o) {

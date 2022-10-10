@@ -23,8 +23,10 @@ public class FolderMovie {
             initialValue = 1, allocationSize = 1000)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
     private String description;
 
     @Enumerated(EnumType.STRING)

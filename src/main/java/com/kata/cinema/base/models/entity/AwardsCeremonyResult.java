@@ -12,7 +12,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Table(name = "awards_ceremony_result")
 public class AwardsCeremonyResult {
 
@@ -23,34 +22,39 @@ public class AwardsCeremonyResult {
             initialValue = 1, allocationSize = 30)
     private Long id;
 
-    //TODO сделать нормальную связь с персоной
-    @Column(name = "person_id")
-    private Long personId;
-
-    //TODO сделать нормальную связь с фильмом
-    @Column(name = "movie_id")
-    private Long movieId;
-
-    @ToString.Exclude
-    @OneToMany
-    //TODO сделать одностороннию связь с другой стороны
-    private Set<Nomination> nominations;
-
-    @ToString.Exclude
-    @OneToMany
-    //TODO сделать одностороннию связь с другой стороны
-    private Set<AwardsCeremony> awardsCeremonies;
-
     @Column(name = "nomination_status")
     private String nominationStatus;
+
+
+    //TODO сделать нормальную связь с персоной
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "persons")
+    private Persons persons;
+
+    //TODO сделать нормальную связь с фильмом
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "movies")
+    private Movies movies;
+
+    //TODO сделать одностороннию связь с другой стороны
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "nomination")
+    private Nomination nominations;
+
+    //TODO сделать одностороннию связь с другой стороны
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "awards_ceremony")
+    private AwardsCeremony awardsCeremonies;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AwardsCeremonyResult that = (AwardsCeremonyResult) o;
-        return id.equals(that.id) && personId.equals(that.personId) && movieId.equals(that.movieId)
-                && nominationStatus.equals(that.nominationStatus);
+        return Objects.equals(id, that.id) && Objects.equals(persons, that.persons)
+                && Objects.equals(movies, that.movies) && Objects.equals(nominations, that.nominations)
+                && Objects.equals(awardsCeremonies, that.awardsCeremonies)
+                && Objects.equals(nominationStatus, that.nominationStatus);
     }
 
     @Override
