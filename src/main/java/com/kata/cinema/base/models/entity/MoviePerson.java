@@ -1,12 +1,10 @@
 package com.kata.cinema.base.models.entity;
 import com.kata.cinema.base.models.enums.TypeCharacter;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -14,14 +12,13 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Embeddable
-@EqualsAndHashCode(of = {"id"})
+@ToString
 @Table(name = "movie_person")
 public class MoviePerson {
     @Getter
     @Setter
     @NoArgsConstructor
     @Embeddable
-    @EqualsAndHashCode(of = {"personId", "movieId"})
     public static class Id implements Serializable {
 
         @Column(name = "person_id")
@@ -38,20 +35,20 @@ public class MoviePerson {
     @EmbeddedId
     private Id id;
 
+    @ToString.Exclude
     @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id", insertable = false, updatable = false)
     private Person person;
 
+    @ToString.Exclude
     @ManyToOne(targetEntity = Movie.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", insertable = false, updatable = false)
     private Movie movie;
 
-    @ManyToMany
-    @JoinTable(name = "movie_person_to_profession",
-            joinColumns = {@JoinColumn(name = "movie_id", insertable = false, updatable = false),
-                    @JoinColumn(name = "person_id", insertable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "profession_id")})
-    private Set<Profession> professions;
+    @ToString.Exclude
+    @ManyToOne(targetEntity = Profession.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "profession_id", insertable = false, updatable = false)
+    private Profession professions;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_character")
@@ -59,6 +56,19 @@ public class MoviePerson {
 
     @Column(name = "name_role")
     private String nameRole;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MoviePerson that = (MoviePerson) o;
+        return id.equals(that.id) && type.equals(that.type) && nameRole.equals(that.nameRole);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
 
 

@@ -12,33 +12,53 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Table(name = "awards_ceremony_result")
 public class AwardsCeremonyResult {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "awcr_seq")
+    @SequenceGenerator(name = "awcr_seq",
+            sequenceName = "awcr_sequence",
+            initialValue = 1, allocationSize = 30)
     private Long id;
 
-    @Column(name = "person_id")
-
-    private Long personId;
-
-    @Column(name = "movie_id")
-    private Long movieId;
-
-    @Column(name = "nomination_id")
-    @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "nomination_id")
-    private Set<Nomination> nominations;
-
-    @Column(name = "awards_ceremony_id")
-    @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "awards_ceremony_id")
-    private Set<AwardsCeremony> awardsCeremonies;
-
     @Column(name = "nomination_status")
-    @Enumerated(EnumType.STRING)
     private String nominationStatus;
+
+
+    //TODO сделать нормальную связь с персоной
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "persons")
+    private Persons persons;
+
+    //TODO сделать нормальную связь с фильмом
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "movies")
+    private Movies movies;
+
+    //TODO сделать одностороннию связь с другой стороны
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "nomination")
+    private Nomination nominations;
+
+    //TODO сделать одностороннию связь с другой стороны
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "awards_ceremony")
+    private AwardsCeremony awardsCeremonies;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AwardsCeremonyResult that = (AwardsCeremonyResult) o;
+        return Objects.equals(id, that.id) && Objects.equals(persons, that.persons)
+                && Objects.equals(movies, that.movies) && Objects.equals(nominations, that.nominations)
+                && Objects.equals(awardsCeremonies, that.awardsCeremonies)
+                && Objects.equals(nominationStatus, that.nominationStatus);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

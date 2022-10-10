@@ -1,23 +1,24 @@
 package com.kata.cinema.base.models.entity;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@ToString
 @Entity
 @Table(name = "persons")
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "per_seq")
+    @SequenceGenerator(name = "per_seq",
+            sequenceName = "per_sequence",
+            initialValue = 1, allocationSize = 1000)
     private Long id;
 
     @Column(name = "first_name")
@@ -36,10 +37,24 @@ public class Person {
     @Column(name = "place_of_birth")
     private String placeBirth;
 
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "person_profession",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "profession_id"))
     private Set<Profession> professions;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person that = (Person) o;
+        return id.equals(that.id) && firstName.equals(that.firstName) && lastName.equals(that.lastName) &&
+                height.equals(that.height) && dateBirth.equals(that.dateBirth) && placeBirth.equals(that.placeBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
