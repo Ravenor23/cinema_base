@@ -26,6 +26,7 @@ public class UserMovieRestController {
         return ResponseEntity.ok().build();
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<ScoreResponseDto> getProductRe(@PathVariable Long id) {
         return ResponseEntity.ok(scoreService.findById(id));
