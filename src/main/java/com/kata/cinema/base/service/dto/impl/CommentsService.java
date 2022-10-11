@@ -3,6 +3,7 @@ package com.kata.cinema.base.service.dto.impl;
 import com.kata.cinema.base.mappers.CommentsMapper;
 import com.kata.cinema.base.models.dto.response.CommentsResponseDto;
 import com.kata.cinema.base.repositories.CommentsRepository;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@EnableAutoConfiguration
 public class CommentsService {
 
     private final CommentsMapper commentsMapper;
