@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/uploads/movies/preview")
 public class ResourcesController {
 
     private final ImageService imageService;
@@ -20,7 +19,7 @@ public class ResourcesController {
         this.imageService = imageService;
     }
 
-    @GetMapping("/pic.png")
+    @GetMapping(value = "/uploads/**")
     public ResponseEntity<byte[]> getPicPNG() throws IOException {
         return imageService.pngToResponse("src/main/resources/uploads/movies/preview/pic.png");
     }
