@@ -29,12 +29,12 @@ public class AwardsCeremonyResult {
     //TODO сделать нормальную связь с персоной
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "persons")
-    private Persons persons;
+    private Person persons;
 
     //TODO сделать нормальную связь с фильмом
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "movies")
-    private Movies movies;
+    private Movie movies;
 
     //TODO сделать одностороннию связь с другой стороны
     @ManyToOne(fetch = FetchType.LAZY)

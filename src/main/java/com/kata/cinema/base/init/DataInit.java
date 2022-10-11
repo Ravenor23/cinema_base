@@ -1,13 +1,13 @@
-package src.src.main.java.com.kata.cinema.base.init;
+package com.kata.cinema.base.init;
 
 import com.kata.cinema.base.models.entity.Collection;
 import com.kata.cinema.base.models.entity.Genre;
 import com.kata.cinema.base.models.entity.Movie;
-import src.src.main.java.com.kata.cinema.base.models.entity.MPAA;
-import src.src.main.java.com.kata.cinema.base.models.entity.RARS;
-import src.src.main.java.com.kata.cinema.base.service.entity.impl.CollectionServiceImp;
-import src.src.main.java.com.kata.cinema.base.service.entity.impl.GenreService;
-import src.src.main.java.com.kata.cinema.base.service.entity.impl.MovieService;
+import com.kata.cinema.base.models.entity.MPAA;
+import com.kata.cinema.base.models.entity.RARS;
+import com.kata.cinema.base.service.entity.impl.CollectionServiceImp;
+import com.kata.cinema.base.service.entity.impl.GenreService;
+import com.kata.cinema.base.service.entity.impl.MovieService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
 
