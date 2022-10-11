@@ -3,6 +3,7 @@ package com.kata.cinema.base.models.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
