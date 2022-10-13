@@ -1,8 +1,8 @@
-package src.src.main.java.com.kata.cinema.base.service.entity.impl;
+package com.kata.cinema.base.service.entity.impl;
 
 import com.kata.cinema.base.models.entity.Genre;
+import com.kata.cinema.base.repositories.GenreRepository;
 import org.springframework.stereotype.Service;
-import src.src.main.java.com.kata.cinema.base.service.entity.impl.GenreService;
 
 @Service
 public class GenreServiceImp implements GenreService {
