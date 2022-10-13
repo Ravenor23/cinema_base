@@ -14,8 +14,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    public UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
-
     @Mapping(target = "fullName", ignore = true)
     @Mapping(target = "avatarUrl", ignore = true)
     UserResponseDto toDTO(User user);
