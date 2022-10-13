@@ -9,6 +9,8 @@ import com.kata.cinema.base.service.dto.impl.ReviewService;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.kata.cinema.base.service.dto.impl.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class MovieRestController {
 
-  private final PaginationDtoService<ReviewResponseDto> paginationDtoService;
+  private final Page paginationDtoService;
   private final ReviewService reviewService;
 
   @Autowired
-  public MovieRestController(PaginationDtoService<ReviewResponseDto> paginationDtoService,
+  public MovieRestController(Page paginationDtoService,
       ReviewService reviewService) {
     this.paginationDtoService = paginationDtoService;
     this.reviewService = reviewService;

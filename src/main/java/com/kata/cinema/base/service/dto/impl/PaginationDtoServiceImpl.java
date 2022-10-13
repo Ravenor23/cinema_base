@@ -21,8 +21,7 @@ public class PaginationDtoServiceImpl<T> implements PaginationDtoService<T> {
   }
 
   @Override
-  public PageDto<T> getPageDtoWithParameters(Integer currentPage, Integer itemsOnPage,
-      Map parameters) {
+  public PageDto<T> getPageDtoWithParameters(Integer currentPage, Integer itemsOnPage, Map parameters) {
     PageDto<T> pageDto = new PageDto<>();
     pageDto.setCount(paginationDtoDao.getResultTotal(parameters));
     pageDto.setEntities(paginationDtoDao.getItemsDto(currentPage,itemsOnPage, parameters));
