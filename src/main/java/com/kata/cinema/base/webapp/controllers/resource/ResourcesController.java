@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
 
@@ -19,8 +19,8 @@ public class ResourcesController {
         this.imageService = imageService;
     }
 
-    @GetMapping(value = "/uploads/**")
-    public ResponseEntity<byte[]> getPicPNG() throws IOException {
-        return imageService.pngToResponse("src/main/resources/uploads/movies/preview/pic.png");
+    @GetMapping(value = "/uploads/{pngFile}")
+    public ResponseEntity<byte[]> getImage(@PathVariable String pngFile) throws IOException {
+        return imageService.pngToResponse("src/main/resources/uploads/movies/preview/" + pngFile);
     }
 }
