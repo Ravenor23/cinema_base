@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 @Controller
 public class ResourcesController {
@@ -19,8 +21,9 @@ public class ResourcesController {
         this.imageService = imageService;
     }
 
-    @GetMapping(value = "/uploads/{pngFile}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String pngFile) throws IOException {
-        return imageService.pngToResponse("src/main/resources/uploads/movies/preview/" + pngFile);
+    @GetMapping(value = "/uploads/**")
+    public ResponseEntity<byte[]> getImage(HttpServletRequest request) throws IOException {
+        String requestPath = URLDecoder.decode(request.getRequestURI(), StandardCharsets.UTF_8);
+        return imageService.pngToResponse("src/main/resources" + requestPath);
     }
 }
