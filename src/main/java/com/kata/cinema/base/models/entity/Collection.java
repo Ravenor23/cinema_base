@@ -27,12 +27,16 @@ public class Collection {
     @Column(name = "enable")
     private Boolean enable;
 
+    public Collection(String name, Boolean enable) {
+        this.name = name;
+        this.enable = enable;
+    }
+
     @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "collections_movies",
             joinColumns = @JoinColumn(name = "collections_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "movies_id", referencedColumnName = "id"))
-
     @ToString.Exclude
     private Set<Movie> movies;
 

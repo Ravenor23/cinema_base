@@ -12,8 +12,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 @ConditionalOnExpression("${app.initializer.runInitialize}")
@@ -28,66 +31,58 @@ public class DataInit {
         this.collectionService = collectionService;
     }
 
-    List<Genre> listGenre = new ArrayList<>();
-    List<Collection> listCollection = new ArrayList<>();
-
-    List<Movie> listMovies = new ArrayList<>();
-
     @PostConstruct
+    public void init() {
+        createGenre();
+        createMovie();
+        createCollection();
+    }
+
     public void createGenre() {
-        Genre genre = new Genre();
-        for (int i = 1; i < 11; i++) {
-            genre.setName("Genre" + i);
-            genreService.save(genre);
-            listGenre.add(genre);
+        for (int i = 1; i <= 10; i++) {
+            genreService.save(new Genre("Жанр" + i));
         }
     }
 
-    @PostConstruct
     public void createMovie() {
-        for (int i = 1; i < 101; i++) {
+        for (int i = 1; i <= 100; i++) {
             Movie movie = new Movie();
-            movie.setName("Movie" + i);
-            movie.setDataRelease(LocalDate.parse(String.valueOf(1980 + (int) (Math.random() * 42))));
-            movie.setTime(String.valueOf(100 + (int) (Math.random() * 80)));
-            movie.setDescription("описание описание описание описание описание описание описание описание " +
-                    "описание описание описание описание");
-            movie.setMpaa(String.valueOf(MPAA.generateRandomMPAA()));
-            movie.setRars(String.valueOf(RARS.generateRandomRARS()));
+            movie.setName("фильм" + i);
+            movie.setDataRelease(LocalDate.ofEpochDay(ThreadLocalRandom.current()
+                    .nextLong(LocalDate.of(1990, Month.JANUARY, 1).toEpochDay(),
+                            LocalDate.now().toEpochDay())));
+            movie.setDescription("описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма\n" +
+                    "описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма\n" +
+                    "описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма\n" +
+                    "описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма");
 
-            Collections.shuffle(listGenre);
-            if (i % 2 == 0) {
-                movie.setGenres((Set<Genre>) listGenre.subList(0, 3));
-            } else {
-                movie.setGenres((Set<Genre>) listGenre.subList(0, 1));
-            }
+            List<MPAA> mpaaList = Arrays.asList(MPAA.values());
+            movie.setMpaa(mpaaList.get(new SecureRandom().nextInt(mpaaList.size())));
+
+            List<RARS> rarsList = Arrays.asList(RARS.values());
+            movie.setRars(rarsList.get(new SecureRandom().nextInt(rarsList.size())));
+
+            List<Genre> genreList = new ArrayList<>(genreService.getAll());
+            int randomSize = ThreadLocalRandom.current().nextInt(1, 4);
+            Collections.shuffle(genreList);
+            movie.setGenres(new HashSet<>(genreList.subList(genreList.size() - randomSize, genreList.size())));
 
             movieService.save(movie);
         }
     }
 
-    @PostConstruct
     public void createCollection() {
-        Collection collection = new Collection();
-        for (int i = 1; i < 21; i++) {
-            collection.setName("Collection" + i);
-            if (i >= 15) {
-                collection.setEnable(false);
-            } else {
-                collection.setEnable(true);
+            for (int i = 1; i <= 20; i++) {
+                boolean enable = !Arrays.asList(2, 6, 10, 14, 18).contains(i);
+                Collection collection = new Collection("Коллекция" + i, enable);
+
+                List<Movie> movieList = new ArrayList<>(movieService.getAll());
+                int randomSize = ThreadLocalRandom.current().nextInt(5, 16);
+                Collections.shuffle(movieList);
+                collection.setMovies(new HashSet<>(movieList.subList(movieList.size() - randomSize, movieList.size())));
+
+                collectionService.save(collection);
             }
-
-
-            Collections.shuffle(listMovies);
-            if (i % 2 == 0) {
-                collection.setMovies((Set<Movie>) listMovies.subList(0, 15));
-            } else {
-                collection.setMovies((Set<Movie>) listMovies.subList(0, 5));
-            }
-
-            collectionService.save(collection);
-            listCollection.add(collection);
-        }
     }
 
 }

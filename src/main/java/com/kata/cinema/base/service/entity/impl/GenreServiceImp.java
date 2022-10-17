@@ -5,6 +5,8 @@ import com.kata.cinema.base.repositories.GenreRepository;
 import org.springframework.stereotype.Service;
 import com.kata.cinema.base.service.entity.impl.GenreService;
 
+import java.util.List;
+
 @Service
 public class GenreServiceImp implements GenreService {
     private final GenreRepository genreRepository;
@@ -16,5 +18,10 @@ public class GenreServiceImp implements GenreService {
     @Override
     public void save(Genre genre) {
         genreRepository.save(genre);
+    }
+
+    @Override
+    public List<Genre> getAll() {
+        return genreRepository.findAll();
     }
 }

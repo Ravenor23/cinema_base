@@ -5,6 +5,8 @@ import com.kata.cinema.base.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 import com.kata.cinema.base.service.entity.impl.MovieService;
 
+import java.util.List;
+
 @Service
 public class MovieServiceImp implements MovieService {
     private final MovieRepository movieRepository;
@@ -16,5 +18,10 @@ public class MovieServiceImp implements MovieService {
     @Override
     public void save(Movie movie) {
         movieRepository.save(movie);
+    }
+
+    @Override
+    public List<Movie> getAll() {
+        return movieRepository.findAll();
     }
 }
