@@ -22,10 +22,14 @@ public class ProductionMovieStudioService {
     @Transactional
     public ProductionMovieStudioResponseDto getProductionMovieStudioResponseDto(Long id) {
         ProductionMovieStudioResponseDto productionMovieStudioResponseDto = new ProductionMovieStudioResponseDto();
-        ProductionStudioMovie productionStudioMovie = productionMovieStudioRepository.findById(id)
-                .orElseThrow(NoSuchElementException::new);
-        productionMovieStudioResponseDto.setName(productionStudioMovie.getMovie().getName());
-        productionMovieStudioResponseDto.setStudioPerformance(productionStudioMovie.getPerformance());
+        if (productionMovieStudioRepository.existsById(id)) {
+            ProductionStudioMovie productionStudioMovie = productionMovieStudioRepository.findProductionStudioMovieById(id);
+            productionMovieStudioResponseDto.setId(id);
+            productionMovieStudioResponseDto.setName(productionStudioMovie.getMovie().getName());
+            productionMovieStudioResponseDto.setStudioPerformance(productionStudioMovie.getPerformance());
+        } else {
+            throw new NoSuchElementException();
+        }
         return productionMovieStudioResponseDto;
     }
 }

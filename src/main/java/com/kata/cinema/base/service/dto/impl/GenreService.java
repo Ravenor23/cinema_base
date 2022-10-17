@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
 @Service
 @Transactional
 public class GenreService {
@@ -41,5 +42,4 @@ public class GenreService {
     public void deleteById(Long id) {
         genreRepository.deleteById(id);
     }
-
 }

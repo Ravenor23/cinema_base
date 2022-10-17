@@ -1,7 +1,7 @@
 package com.kata.cinema.base.models.entity;
+package com.kata.cinema.base.models.enums;
 
 import lombok.Getter;
-
 import java.util.Random;
 
 @Getter
@@ -27,4 +27,3 @@ public enum MPAA {
         return " + translation + ";
     }
 }
-
