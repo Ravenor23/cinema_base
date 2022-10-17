@@ -26,10 +26,7 @@ public interface UserMapper {
     default void setFullName(@MappingTarget UserResponseDto userResponseDto,
                              User user) {
         userResponseDto.setFullName(user.getFirstName() + ", " +  user.getLastName());
-        //TODO заметил что у юзера нет поля "private Avatar avatar",
-        // чтобы замапить в userDTO поле avatarUrl необходимо задать классу User поле private Avatar avatar;
-        userResponseDto.setAvatarUrl(user.getAvatar.getAvatrUrl);
-
+        userResponseDto.setAvatarUrl(user.getAvatarUrl());
     }
 
 }
