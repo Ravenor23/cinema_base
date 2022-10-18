@@ -61,6 +61,10 @@ public class Movie {
     )
     private Set<Genre> genres;
 
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "movies")
+    private Set<FolderMovie> folderMovies;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
