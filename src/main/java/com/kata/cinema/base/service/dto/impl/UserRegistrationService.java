@@ -30,7 +30,7 @@ public class UserRegistrationService {
 
     public void registerNewUser(UserRegistrationRequestDto userRegistrationRequestDto) {
         User userToRegister = userMapper.toEntity(userRegistrationRequestDto);
-        Role defaultUserRole = roleService.findRoleByName("ROLE_USER");
+        Role defaultUserRole = roleService.findRoleByName("USER");
         userToRegister.setRoles(Collections.singleton(defaultUserRole));
         String newUserPassword = passwordEncoder.encode(userRegistrationRequestDto.getPassword());
         userToRegister.setPassword(newUserPassword);
