@@ -37,6 +37,15 @@ public class Person {
     @Column(name = "place_of_birth")
     private String placeBirth;
 
+    @Column(name = "photo_url")
+    private String photoUrl;
+
+    @Column(name = "original_name ")
+    private String originalName ;
+
+    @Column(name = "original_last_name ")
+    private String originalLastName ;
+
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "person_profession",

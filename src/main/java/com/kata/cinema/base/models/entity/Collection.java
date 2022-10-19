@@ -27,6 +27,9 @@ public class Collection {
     @Column(name = "enable")
     private Boolean enable;
 
+    @Column(name = "preview_url")
+    private String previewUrl;
+
     @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "collections_movies",
