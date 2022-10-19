@@ -1,6 +1,7 @@
 package com.kata.cinema.base.models.entity;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -13,7 +14,7 @@ import java.util.Set;
 @ToString
 @Setter
 @Getter
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
@@ -40,5 +41,10 @@ public class Role {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }
