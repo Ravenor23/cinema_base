@@ -30,6 +30,10 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "roles")
     Set<User> users;
 
+    public Role(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
