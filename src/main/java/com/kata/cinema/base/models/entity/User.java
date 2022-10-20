@@ -44,6 +44,11 @@ public class User {
     private String avatarUrl;
 
     @ToString.Exclude
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Score> scores;
+
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
               joinColumns = {@JoinColumn(name = "user_id")},

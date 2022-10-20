@@ -8,4 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ScoreMovieRepository extends JpaRepository<Score, Long> {
+
+    List<Score> findUserByUserId(Long id);
 }
