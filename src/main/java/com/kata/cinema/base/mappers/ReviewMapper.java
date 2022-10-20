@@ -4,13 +4,12 @@ import com.kata.cinema.base.models.dto.response.ReviewResponseDto;
 import com.kata.cinema.base.models.entity.Review;
 import java.util.List;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
 
-  ReviewMapper INSTANCE = Mappers.getMapper(ReviewMapper.class);
-
+  @Mapping( target = "fullName", expression = "java(review.getUser().getFirstName() + \" \" + review.getUser().getLastName())")
   ReviewResponseDto toDTO(Review review);
 
   List<ReviewResponseDto> modelsToDTO(List<Review> reviews);
