@@ -1,5 +1,7 @@
 package com.kata.cinema.base.models.entity;
 
+import com.kata.cinema.base.models.enums.MPAA;
+import com.kata.cinema.base.models.enums.RARS;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,18 +36,21 @@ public class Movie {
     private LocalDate dataRelease;
 
     @Column(name = "rars")
-    private String rars;
+    @Enumerated(EnumType.STRING)
+    private RARS rars;
 
     @Column(name = "mpaa")
-    private String mpaa;
+    @Enumerated(EnumType.STRING)
+    private MPAA mpaa;
 
     @Column(name = "time")
     private String time;
 
+    @Lob
     @Column(name = "description")
     private String description;
 
-    @Column(name = "origin_name")
+    @Column(name = "original_name")
     private String originName;
 
     @ToString.Exclude
@@ -55,6 +60,10 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private Set<Genre> genres;
+
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "movies")
+    private Set<FolderMovie> folderMovies;
 
     @Override
     public boolean equals(Object o) {
