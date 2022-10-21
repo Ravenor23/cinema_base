@@ -1,7 +1,7 @@
 package com.kata.cinema.base.webapp.controllers.user;
 
 import com.kata.cinema.base.models.dto.response.ScoreResponseDto;
-import com.kata.cinema.base.service.entity.impl.ScoreService;
+import com.kata.cinema.base.service.entity.ScoreService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
