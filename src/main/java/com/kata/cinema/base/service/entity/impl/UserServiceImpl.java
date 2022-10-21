@@ -2,6 +2,7 @@ package com.kata.cinema.base.service.entity.impl;
 
 import com.kata.cinema.base.models.entity.User;
 import com.kata.cinema.base.repositories.UserRepository;
+import com.kata.cinema.base.service.entity.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

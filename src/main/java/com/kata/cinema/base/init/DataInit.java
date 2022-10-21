@@ -6,6 +6,7 @@ import com.kata.cinema.base.models.enums.Category;
 import com.kata.cinema.base.models.enums.MPAA;
 import com.kata.cinema.base.models.enums.Privacy;
 import com.kata.cinema.base.models.enums.RARS;
+import com.kata.cinema.base.service.entity.*;
 import com.kata.cinema.base.service.entity.impl.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DataInit {
     private final MovieService movieService;
     private final GenreService genreService;
-    private final CollectionServiceImp collectionService;
+    private final CollectionService collectionService;
     private final RoleService roleService;
     private final UserService userService;
     private final FolderMovieService folderMovieService;

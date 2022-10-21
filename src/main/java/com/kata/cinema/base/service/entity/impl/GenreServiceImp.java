@@ -3,7 +3,7 @@ package com.kata.cinema.base.service.entity.impl;
 import com.kata.cinema.base.models.entity.Genre;
 import com.kata.cinema.base.repositories.GenreRepository;
 import org.springframework.stereotype.Service;
-import com.kata.cinema.base.service.entity.impl.GenreService;
+import com.kata.cinema.base.service.entity.GenreService;
 
 import java.util.List;
 

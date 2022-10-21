@@ -1,4 +1,4 @@
-package com.kata.cinema.base.service.entity.impl;
+package com.kata.cinema.base.service.entity;
 
 import com.kata.cinema.base.models.entity.Collection;
 
