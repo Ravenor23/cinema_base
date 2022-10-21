@@ -1,4 +1,4 @@
-package com.kata.cinema.base.webapp.controllers.admin;
+package com.kata.cinema.base.webapp.controllers.admin.admin_production_studio_rest_controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kata.cinema.base.models.dto.request.ProductionStudioRequestDto;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestPropertySource("/test.properties")
 @SpringBootTest(classes = CinemaBaseApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AdminProductionStudioRestControllerTest {
+public class UpdateTest {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -31,40 +31,19 @@ public class AdminProductionStudioRestControllerTest {
     @LocalServerPort
     private int port;
 
-    private String createURLWithPort(String url) {
+    private String createURL(String url) {
         return "http://localhost:" + port + url;
     }
 
     @Test
-    public void saveStudioTest() throws Exception {
-        ProductionStudioRequestDto productionStudioRequestDto = new ProductionStudioRequestDto(
-                "Ленфильм", "Описание Ленфильма", "1914 г."
-        );
-
-        mockMvc.perform(post(createURLWithPort("/api/admin/studios"))
-                        .content(objectMapper.writeValueAsString(productionStudioRequestDto))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Ленфильм"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.description").value("Описание Ленфильма"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.dateFoundation").value("1914 г."));
-    }
-
-    @Test
-    @Sql("data/initForDeleteTest.sql")
-    public void deleteStudioTest() throws Exception {
-
-        mockMvc.perform(delete(createURLWithPort("/api/admin/studios/100"))).andExpect(status().isNoContent());
-    }
-
-    @Test
-    @Sql("data/initForUpdateTest.sql")
+    @Sql(scripts = "dataset/update/init.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "dataset/update/delete.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void updateStudioTest() throws Exception {
         ProductionStudioRequestDto productionStudioRequestDto = new ProductionStudioRequestDto(
                 "Амедиа", "DESCRIPTION UPDATE", "2002 г."
         );
 
-        mockMvc.perform(put(createURLWithPort("/api/admin/studios/100"))
+        mockMvc.perform(put(createURL("/api/admin/studios/100"))
                         .content(objectMapper.writeValueAsString(productionStudioRequestDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

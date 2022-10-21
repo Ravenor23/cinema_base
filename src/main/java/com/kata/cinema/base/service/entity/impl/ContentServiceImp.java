@@ -3,6 +3,7 @@ package com.kata.cinema.base.service.entity.impl;
 import com.kata.cinema.base.models.entity.Content;
 import com.kata.cinema.base.repositories.ContentRepository;
 import com.kata.cinema.base.repositories.MovieRepository;
+import com.kata.cinema.base.service.entity.ContentService;
 import org.springframework.stereotype.Service;
 
 import java.io.File;

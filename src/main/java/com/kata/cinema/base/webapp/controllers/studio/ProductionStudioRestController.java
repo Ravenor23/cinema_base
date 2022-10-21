@@ -1,7 +1,7 @@
 package com.kata.cinema.base.webapp.controllers.studio;
 
 import com.kata.cinema.base.models.dto.response.ProductionMovieStudioResponseDto;
-import com.kata.cinema.base.service.dto.impl.ProductionMovieStudioService;
+import com.kata.cinema.base.service.dto.ProductionMovieStudioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

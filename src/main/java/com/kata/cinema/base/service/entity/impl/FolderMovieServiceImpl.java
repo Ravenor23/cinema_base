@@ -2,6 +2,7 @@ package com.kata.cinema.base.service.entity.impl;
 
 import com.kata.cinema.base.models.entity.FolderMovie;
 import com.kata.cinema.base.repositories.FolderMovieRepository;
+import com.kata.cinema.base.service.entity.FolderMovieService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

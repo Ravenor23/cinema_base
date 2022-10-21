@@ -11,6 +11,7 @@ import com.kata.cinema.base.repositories.AnswerRepository;
 import com.kata.cinema.base.repositories.NewsRepository;
 import com.kata.cinema.base.repositories.QuestionRepository;
 import com.kata.cinema.base.repositories.ResultRepository;
+import com.kata.cinema.base.service.dto.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class QuestionService {
+public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionRepository questionRepository;
     private final NewsRepository newsRepository;
@@ -27,8 +28,8 @@ public class QuestionService {
     private final ResultRepository resultRepository;
 
     @Autowired
-    public QuestionService(QuestionRepository questionRepository, NewsRepository newsRepository,
-                           AnswerRepository answerRepository, ResultRepository resultRepository) {
+    public QuestionServiceImpl(QuestionRepository questionRepository, NewsRepository newsRepository,
+                               AnswerRepository answerRepository, ResultRepository resultRepository) {
         this.questionRepository = questionRepository;
         this.newsRepository = newsRepository;
         this.answerRepository = answerRepository;

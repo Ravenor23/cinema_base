@@ -5,6 +5,7 @@ import com.kata.cinema.base.models.entity.Score;
 import com.kata.cinema.base.repositories.MovieRepository;
 import com.kata.cinema.base.repositories.ScoreRepository;
 import com.kata.cinema.base.repositories.UserRepository;
+import com.kata.cinema.base.service.entity.ScoreService;
 import org.springframework.stereotype.Service;
 
 @Service
