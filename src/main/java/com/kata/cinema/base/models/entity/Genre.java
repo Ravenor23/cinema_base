@@ -20,20 +20,21 @@ public class Genre {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Movie movie;
+    public Genre(String name) {
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Genre genre = (Genre) o;
-        return id == genre.id && Objects.equals(name, genre.name) && Objects.equals(movie, genre.movie);
+        return id == genre.id && Objects.equals(name, genre.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, movie);
+        return Objects.hash(id, name);
     }
 
     @Override
@@ -41,7 +42,6 @@ public class Genre {
         return "Genre{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", movie=" + movie +
                 '}';
     }
 }

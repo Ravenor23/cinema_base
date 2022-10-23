@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "folders_movies")
@@ -39,6 +40,13 @@ public class FolderMovie {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "folder_movies_to_movie",
+            joinColumns = @JoinColumn(name = "folder_movies_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    private Set<Movie> movies;
 
     @Override
     public boolean equals(Object o) {
