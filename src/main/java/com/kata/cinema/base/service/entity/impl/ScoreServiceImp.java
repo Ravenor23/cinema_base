@@ -7,6 +7,9 @@ import com.kata.cinema.base.repositories.ScoreRepository;
 import com.kata.cinema.base.repositories.UserRepository;
 import com.kata.cinema.base.service.entity.ScoreService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ScoreServiceImp implements ScoreService {
@@ -46,4 +49,13 @@ public class ScoreServiceImp implements ScoreService {
         scoreRepository.deleteById(id);
     }
 
+    @Transactional
+    public void save(Score score) {
+        scoreRepository.save(score);
+    }
+
+    @Transactional
+    public List<Score> getAll() {
+        return scoreRepository.findAll();
+    }
 }
