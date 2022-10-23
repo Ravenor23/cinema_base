@@ -1,40 +1,29 @@
 package com.kata.cinema.base.service.entity.impl;
 
-import com.kata.cinema.base.mappers.UserMapper;
-import com.kata.cinema.base.models.dto.response.UserResponseDto;
 import com.kata.cinema.base.models.entity.User;
 import com.kata.cinema.base.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kata.cinema.base.service.entity.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final UserMapper userMapper;
-
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userMapper = userMapper;
     }
 
-    @Override
-    public List<UserResponseDto> searchByEmail(String email) {
-        return userMapper.toDTOList(userRepository.findAllByEmailContainingIgnoreCase(email));
-    }
-
-    @Override
+    @Transactional
     public void save(User user) {
         userRepository.save(user);
-
     }
 
-
-
+    @Transactional
+    public User getById(Long id) {
+        return userRepository.findById(id).orElseThrow(NoSuchElementException::new);
+    }
 }

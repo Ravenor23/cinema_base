@@ -1,7 +1,7 @@
 package com.kata.cinema.base.webapp.controllers.admin;
 
 import com.kata.cinema.base.models.dto.request.QuestionRequestDto;
-import com.kata.cinema.base.service.dto.impl.QuestionService;
+import com.kata.cinema.base.service.dto.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

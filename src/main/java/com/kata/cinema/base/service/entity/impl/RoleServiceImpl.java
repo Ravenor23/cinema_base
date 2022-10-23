@@ -2,6 +2,7 @@ package com.kata.cinema.base.service.entity.impl;
 
 import com.kata.cinema.base.models.entity.Role;
 import com.kata.cinema.base.repositories.RoleRepository;
+import com.kata.cinema.base.service.entity.RoleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

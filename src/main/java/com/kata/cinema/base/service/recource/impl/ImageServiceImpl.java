@@ -1,5 +1,6 @@
-package com.kata.cinema.base.service.recource;
+package com.kata.cinema.base.service.recource.impl;
 
+import com.kata.cinema.base.service.recource.ImageService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

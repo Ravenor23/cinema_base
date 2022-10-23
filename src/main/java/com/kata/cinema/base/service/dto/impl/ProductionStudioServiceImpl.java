@@ -3,17 +3,18 @@ package com.kata.cinema.base.service.dto.impl;
 import com.kata.cinema.base.models.dto.request.ProductionStudioRequestDto;
 import com.kata.cinema.base.models.entity.ProductionStudio;
 import com.kata.cinema.base.repositories.ProductionStudioRepository;
+import com.kata.cinema.base.service.dto.ProductionStudioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ProductionStudioService {
+public class ProductionStudioServiceImpl implements ProductionStudioService {
 
     private final ProductionStudioRepository productionStudioRepository;
 
     @Autowired
-    public ProductionStudioService(ProductionStudioRepository productionStudioRepository) {
+    public ProductionStudioServiceImpl(ProductionStudioRepository productionStudioRepository) {
         this.productionStudioRepository = productionStudioRepository;
     }
 

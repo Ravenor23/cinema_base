@@ -1,4 +1,4 @@
-package com.kata.cinema.base.webapp.controllers.studio;
+package com.kata.cinema.base.webapp.controllers.studio.production_studio_rest_controller;
 
 import com.kata.cinema.base.webapp.CinemaBaseApplication;
 import org.junit.jupiter.api.Test;
@@ -14,11 +14,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @AutoConfigureMockMvc
 @TestPropertySource("/test.properties")
 @SpringBootTest(classes = CinemaBaseApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProductionStudioRestControllerTest {
+public class GetByIdTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -31,8 +30,9 @@ public class ProductionStudioRestControllerTest {
     }
 
     @Test
-    @Sql("data/initForGetByIdTest.sql")
-    public void getProductionMovieStudioByIdTest() throws Exception {
+    @Sql(scripts = "dataset/init.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "dataset/delete.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    public void getById() throws Exception {
 
         mockMvc.perform(get(createURLWithPort("/api/movies/100/studios")))
                 .andExpect(status().isOk())

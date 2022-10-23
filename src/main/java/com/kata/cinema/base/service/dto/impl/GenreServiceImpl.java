@@ -4,6 +4,7 @@ import com.kata.cinema.base.mappers.GenreMapper;
 import com.kata.cinema.base.models.dto.response.GenreResponseDto;
 import com.kata.cinema.base.models.entity.Genre;
 import com.kata.cinema.base.repositories.GenreRepository;
+import com.kata.cinema.base.service.dto.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,14 +14,14 @@ import java.util.NoSuchElementException;
 
 @Service
 @Transactional
-public class GenreService {
+public class GenreServiceImpl implements GenreService {
 
     private final GenreMapper genreMapper;
 
     private final GenreRepository genreRepository;
 
     @Autowired
-    public GenreService(GenreMapper genreMapper, GenreRepository genreRepository) {
+    public GenreServiceImpl(GenreMapper genreMapper, GenreRepository genreRepository) {
         this.genreMapper = genreMapper;
         this.genreRepository = genreRepository;
     }
