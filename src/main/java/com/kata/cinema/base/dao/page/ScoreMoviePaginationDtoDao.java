@@ -25,9 +25,8 @@ public class ScoreMoviePaginationDtoDao implements PaginationDtoDao<ScoreMovieRe
     public List<ScoreMovieResponseDto> getItemsDto(Integer currentPage, Integer itemsOnPage, Map<String, Object> parameters) {
         List<ScoreMovieResponseDto> scoreMovieResponseDto = scoreUserMapper.modelsToDTO(
                 entityManager.createQuery("select s from Score s"
-                + "left join fetch s.user u "
-                + " where s.scores =: scores")
-                        .setParameter("scores", parameters.get("scores"))
+                + " where s.user =: user")
+                        .setParameter("user", parameters.get("user"))
                         .setFirstResult((currentPage - 1) * itemsOnPage)
                         .setMaxResults(itemsOnPage)
                         .getResultList());
