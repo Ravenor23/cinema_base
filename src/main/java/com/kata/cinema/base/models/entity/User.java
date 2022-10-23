@@ -46,8 +46,6 @@ public class User implements UserDetails {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
-    @Column(name = "login", unique = true)
-    private String login;
 
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)

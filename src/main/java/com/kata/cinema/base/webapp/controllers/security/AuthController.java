@@ -60,7 +60,7 @@ public class AuthController {
 
         userRegistrationService.registerNewUser(userRegistrationRequestDto);
 
-        return new ResponseEntity<>(Map.of("token", jwtUtil.generateToken(userRegistrationRequestDto.getLogin())),
+        return new ResponseEntity<>(Map.of("token", jwtUtil.generateToken(userRegistrationRequestDto.getEmail())),
                 HttpStatus.OK);
 
     }

@@ -36,10 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/login", "/api/registration").permitAll()
-                .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .antMatchers("/api/user/**").hasRole("USER")
-                .antMatchers("/api/publicist/**").hasRole("PUBLICIST")
+                .antMatchers("/api/token", "/api/registration").permitAll()
+                .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/api/user/**").hasAnyAuthority("USER")
+                .antMatchers("/api/publicist/**").hasAnyAuthority("PUBLICIST")
+                .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

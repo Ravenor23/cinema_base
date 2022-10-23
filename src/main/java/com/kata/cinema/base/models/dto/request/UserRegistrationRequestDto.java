@@ -28,9 +28,6 @@ public class UserRegistrationRequestDto {
     private String lastName;
 
     @NotBlank
-    private String login;
-
-    @NotBlank
     @Size(min = 6, max = 20)
     private String password;
 
@@ -38,6 +35,6 @@ public class UserRegistrationRequestDto {
     @Size(min = 6, max = 20)
     private String confirmPassword;
 
-    private LocalDate birthDay;
+    private LocalDate birthday;
 
 }

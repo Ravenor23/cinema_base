@@ -23,7 +23,7 @@ public interface UserMapper {
         return userList.stream().map(this::toDTO).toList();
     }
 
-    @Mapping(target = "confirmPassword", ignore = true)
+
     User toEntity(UserRegistrationRequestDto userRegistrationRequestDto);
 
 

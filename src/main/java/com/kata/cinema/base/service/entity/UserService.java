@@ -10,4 +10,6 @@ public interface UserService {
     List<UserResponseDto> searchByEmail(String email);
 
     void save(User user);
+
+    User getById(Long id);
 }
