@@ -3,6 +3,7 @@ package com.kata.cinema.base.service.dto.impl;
 import com.kata.cinema.base.dao.PaginationDtoDao;
 import com.kata.cinema.base.models.dto.response.PageDto;
 import com.kata.cinema.base.models.dto.response.ReviewResponseDto;
+import com.kata.cinema.base.models.dto.response.ScoreMovieResponseDto;
 import com.kata.cinema.base.service.ReviewPaginationDtoService;
 import java.util.Map;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 public class ReviewPaginationServiceImpl extends PaginationDtoServiceImpl<ReviewResponseDto> implements
     ReviewPaginationDtoService<ReviewResponseDto> {
 
-  public ReviewPaginationServiceImpl(PaginationDtoDao<ReviewResponseDto> paginationDtoDao) {
+
+  public ReviewPaginationServiceImpl(
+      PaginationDtoDao<ScoreMovieResponseDto> paginationDtoDao) {
     super(paginationDtoDao);
   }
 

@@ -1,7 +1,6 @@
 package com.kata.cinema.base.dao.page;
 
 import com.kata.cinema.base.dao.PaginationDtoDao;
-import com.kata.cinema.base.mappers.ReviewMapper;
 import com.kata.cinema.base.models.dto.response.ReviewResponseDto;
 import com.kata.cinema.base.models.enums.ReviewSortType;
 import java.util.List;
@@ -13,27 +12,24 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ReviewPaginationDtoDao implements PaginationDtoDao<ReviewResponseDto> {
 
-  private final ReviewMapper reviewMapper;
   @PersistenceContext
   private EntityManager entityManager;
-
-  public ReviewPaginationDtoDao(ReviewMapper reviewMapper) {
-    this.reviewMapper = reviewMapper;
-  }
 
   @Override
   public List<ReviewResponseDto> getItemsDto(Integer currentPage, Integer itemsOnPage,
       Map<String, Object> parameters) {
-    List<ReviewResponseDto> reviewResponseDtos = reviewMapper.modelsToDTO(
-        entityManager.createQuery("select r  from Review r "
+    List<ReviewResponseDto> reviewResponseDtos = entityManager.createQuery(
+           "select new com.kata.cinema.base.models.dto.response.ReviewResponseDto("
+               + "r.id, r.typeReview, r.title, r.description, concat(r.user.firstName, ' ', r.user.lastName) as fullName, r.date) "
+                + "from Review r "
                 + "where r.movie.id = :movieId "
                 + "and (r.typeReview = :typeReview or :typeReview is null) "
                 + sort(parameters))
-            .setParameter("movieId", parameters.get("movieId"))
-            .setParameter("typeReview", parameters.getOrDefault("typeReview", null))
-            .setFirstResult((currentPage - 1) * itemsOnPage)
-            .setMaxResults(itemsOnPage)
-            .getResultList());
+        .setParameter("movieId", parameters.get("movieId"))
+        .setParameter("typeReview", parameters.getOrDefault("typeReview", null))
+        .setFirstResult((currentPage - 1) * itemsOnPage)
+        .setMaxResults(itemsOnPage)
+        .getResultList();
     return reviewResponseDtos;
   }
 
