@@ -11,8 +11,8 @@ import java.time.LocalDate;
 public class SearchPersonDto {
     private Long id;
     private String photoUrl;
-    private String fullName; //- конкатенация имени и фамилии
-    private String originalFullName; //- конкатенация оригинальной имени и фамилии
+    private String fullName;
+    private String originalFullName;
     private LocalDate birthday;
 
 }

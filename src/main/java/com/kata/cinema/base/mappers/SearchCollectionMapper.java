@@ -5,17 +5,12 @@ import com.kata.cinema.base.models.entity.Collection;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+
 @Component
 @Mapper(componentModel = "spring")
 public interface SearchCollectionMapper {
 
     SearchCollectionDto toDTO(Collection collection);
 
-    default List<SearchCollectionDto> modelsToDTO(List<Collection> collections){
-        return collections.stream().map(this::toDTO).toList();
-    }
-
     Collection toEntity(SearchCollectionDto searchCollectionDto);
-
 }

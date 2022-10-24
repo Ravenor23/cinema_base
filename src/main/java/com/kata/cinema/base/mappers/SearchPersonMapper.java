@@ -13,10 +13,6 @@ public interface SearchPersonMapper {
 
     SearchPersonDto toDTO(Person person);
 
-    default List<SearchPersonDto> modelsToDTO(List<Person> people){
-        return people.stream().map(this::toDTO).toList();
-    }
-
     Person toEntity(SearchPersonDto searchPersonDto);
 
     @AfterMapping

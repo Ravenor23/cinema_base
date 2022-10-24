@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchResponseDto {
-    private List<SearchMovieDto> searchMovieDto;// - limit = 3
-    private List<SearchCollectionDto> searchCollectionDto;// limit = 3
-    private List<SearchPersonDto> searchPersonDto;// limit = 3
+    private List<SearchMovieDto> searchMovieDto;
+    private List<SearchCollectionDto> searchCollectionDto;
+    private List<SearchPersonDto> searchPersonDto;
 }
