@@ -27,7 +27,7 @@ public class MovieServiceImp implements MovieService {
         return movieRepository.findAll();
     }
 
-    @Transactional
+    @Override
     public Movie findById(Long id) {
         return movieRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }

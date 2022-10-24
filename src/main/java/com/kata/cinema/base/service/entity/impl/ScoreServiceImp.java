@@ -49,12 +49,12 @@ public class ScoreServiceImp implements ScoreService {
         scoreRepository.deleteById(id);
     }
 
-    @Transactional
+    @Override
     public void save(Score score) {
         scoreRepository.save(score);
     }
 
-    @Transactional
+    @Override
     public List<Score> getAll() {
         return scoreRepository.findAll();
     }
