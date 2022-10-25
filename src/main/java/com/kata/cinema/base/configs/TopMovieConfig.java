@@ -27,6 +27,6 @@ public class TopMovieConfig {
     @Scheduled(cron = "0 0 0 * * SUN")
     public void set() throws IOException, SQLException {
 
-        topMovieService.set(2, 5);
+        topMovieService.set(20, 50);
     }
 }
