@@ -1,7 +1,10 @@
 package com.kata.cinema.base.service.entity.impl;
+
 import com.kata.cinema.base.models.entity.Collection;
 import com.kata.cinema.base.repositories.CollectionRepository;
 import org.springframework.stereotype.Service;
+import com.kata.cinema.base.service.entity.CollectionService;
+
 
 @Service
 public class CollectionServiceImp implements CollectionService {

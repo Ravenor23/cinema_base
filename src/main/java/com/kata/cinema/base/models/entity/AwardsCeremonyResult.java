@@ -25,40 +25,24 @@ public class AwardsCeremonyResult {
     @Column(name = "nomination_status")
     private String nominationStatus;
 
-
-    //TODO сделать нормальную связь с персоной
+    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "persons")
-    private Person persons;
+    @JoinColumn(name = "person_id")
+    private Person person;
 
-    //TODO сделать нормальную связь с фильмом
+    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "movies")
-    private Movie movies;
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
-    //TODO сделать одностороннию связь с другой стороны
+    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "nomination")
-    private Nomination nominations;
+    @JoinColumn(name = "nomination_id")
+    private Nomination nomination;
 
-    //TODO сделать одностороннию связь с другой стороны
+    @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "awards_ceremony")
-    private AwardsCeremony awardsCeremonies;
+    @JoinColumn(name = "awards_ceremony_id")
+    private AwardsCeremony awardCeremony;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AwardsCeremonyResult that = (AwardsCeremonyResult) o;
-        return Objects.equals(id, that.id) && Objects.equals(persons, that.persons)
-                && Objects.equals(movies, that.movies) && Objects.equals(nominations, that.nominations)
-                && Objects.equals(awardsCeremonies, that.awardsCeremonies)
-                && Objects.equals(nominationStatus, that.nominationStatus);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
