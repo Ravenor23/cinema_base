@@ -1,11 +1,9 @@
 package com.kata.cinema.base.service.dto.impl;
 
-import com.kata.cinema.base.dao.PaginationDtoDao;
 import com.kata.cinema.base.models.dto.response.ScoreMovieResponseDto;
 import com.kata.cinema.base.service.ScorePaginationDtoService;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
+import com.kata.cinema.base.repositories.PaginationDtoDao;
 
 @Service
 public class ScoreMoviePaginationServiceImpl extends PaginationDtoServiceImpl<ScoreMovieResponseDto> implements ScorePaginationDtoService {

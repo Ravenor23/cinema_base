@@ -1,18 +1,21 @@
-package com.kata.cinema.base.dao.page;
+package com.kata.cinema.base.repositories.impl.page;
 
-import com.kata.cinema.base.dao.PaginationDtoDao;
+import com.kata.cinema.base.repositories.PaginationDtoDao;
 import com.kata.cinema.base.mappers.ScoreUserMapper;
 import com.kata.cinema.base.models.dto.response.ScoreMovieResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class ScoreMoviePaginationDtoDao implements PaginationDtoDao<ScoreMovieResponseDto> {
 
     private final ScoreUserMapper scoreUserMapper;
+
     @PersistenceContext
     private EntityManager entityManager;
 

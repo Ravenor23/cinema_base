@@ -1,4 +1,4 @@
-package com.kata.cinema.base.dao;
+package com.kata.cinema.base.repositories;
 
 import java.util.List;
 import java.util.Map;

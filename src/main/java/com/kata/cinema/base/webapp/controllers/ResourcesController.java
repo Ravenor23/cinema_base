@@ -1,4 +1,4 @@
-package com.kata.cinema.base.webapp.controllers.resource;
+package com.kata.cinema.base.webapp.controllers;
 
 import com.kata.cinema.base.service.recource.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;

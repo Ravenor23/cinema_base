@@ -1,4 +1,4 @@
-package com.kata.cinema.base.webapp.controllers.studio;
+package com.kata.cinema.base.webapp.controllers.unauthorized;
 
 import com.kata.cinema.base.models.dto.response.ProductionMovieStudioResponseDto;
 import com.kata.cinema.base.service.dto.ProductionMovieStudioService;

@@ -1,4 +1,4 @@
-package com.kata.cinema.base.webapp.controllers;
+package com.kata.cinema.base.webapp.controllers.unauthorized;
 
 import com.kata.cinema.base.models.dto.response.UserResponseDto;
 import com.kata.cinema.base.service.dto.UserService;
