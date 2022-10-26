@@ -1,13 +1,13 @@
 package com.kata.cinema.base.init;
 
 import com.kata.cinema.base.models.entity.Collection;
-import com.kata.cinema.base.models.entity.Genre;
-import com.kata.cinema.base.models.entity.Movie;
+import com.kata.cinema.base.models.entity.*;
+import com.kata.cinema.base.models.enums.Category;
 import com.kata.cinema.base.models.enums.MPAA;
+import com.kata.cinema.base.models.enums.Privacy;
 import com.kata.cinema.base.models.enums.RARS;
-import com.kata.cinema.base.service.entity.impl.CollectionServiceImp;
-import com.kata.cinema.base.service.entity.impl.GenreService;
-import com.kata.cinema.base.service.entity.impl.MovieService;
+import com.kata.cinema.base.service.entity.*;
+import com.kata.cinema.base.service.entity.impl.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Component;
 
@@ -23,12 +23,19 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DataInit {
     private final MovieService movieService;
     private final GenreService genreService;
-    private final CollectionServiceImp collectionService;
+    private final CollectionService collectionService;
+    private final RoleService roleService;
+    private final UserService userService;
+    private final FolderMovieService folderMovieService;
 
-    public DataInit(MovieService movieService, GenreService genreService, CollectionServiceImp collectionService) {
+    public DataInit(MovieService movieService, GenreService genreService, CollectionServiceImp collectionService,
+                    RoleService roleService, UserService userService, FolderMovieService folderMovieService) {
         this.movieService = movieService;
         this.genreService = genreService;
         this.collectionService = collectionService;
+        this.roleService = roleService;
+        this.userService = userService;
+        this.folderMovieService = folderMovieService;
     }
 
     @PostConstruct
@@ -36,6 +43,9 @@ public class DataInit {
         createGenre();
         createMovie();
         createCollection();
+        createRole();
+        createUser();
+        createFolderMovie();
     }
 
     public void createGenre() {
@@ -85,4 +95,82 @@ public class DataInit {
             }
     }
 
+    public void createRole() {
+        roleService.save(new Role("USER"));
+        roleService.save(new Role("ADMIN"));
+        roleService.save(new Role("PUBLICIST"));
+    }
+
+    public void createUser() {
+        for (int i = 1; i <= 27; i++) {
+            User user = new User();
+
+            user.setEmail("email" + i + "@mail.ru");
+            user.setFirstName("Имя" + i);
+            user.setLastName("Фамилия" + i);
+            user.setPassword("password");
+
+            LocalDate localDate = LocalDate.ofEpochDay(
+                    ThreadLocalRandom.current().nextLong(
+                            LocalDate.of(1970, 1, 1).toEpochDay(),
+                            LocalDate.of(2010, 12, 31).toEpochDay()
+                    )
+            );
+
+            user.setBirthday(localDate);
+            user.setAvatarUrl("/uploads/users/avatar/#" + i);
+
+            Set<Role> roles = new HashSet<>(Collections.singleton(roleService.getByName("USER")));
+            switch (i) {
+                default -> user.setRoles(roles);
+                case 26 -> {
+                    roles.add(roleService.getByName("ADMIN"));
+                    user.setRoles(roles);
+                }
+                case 27 -> {
+                    roles.add(roleService.getByName("PUBLICIST"));
+                    user.setRoles(roles);
+                }
+            }
+
+            userService.save(user);
+        }
+    }
+
+    public void createFolderMovie() {
+        List<Movie> movieList = new ArrayList<>(movieService.getAll());
+        for (int i = 1; i <= 27; i++) {
+            for (int k = 0; k < 3; k++) {
+                FolderMovie folderMovie = new FolderMovie();
+                folderMovie.setUser(userService.getById((long) i));
+
+                switch (k) {
+                    case 0 -> {
+                        folderMovie.setCategory(Category.WAITING_MOVIES);
+                        folderMovie.setName(Category.WAITING_MOVIES.getTranslation());
+                    }
+                    case 1 -> {
+                        folderMovie.setCategory(Category.FAVORITE_MOVIES);
+                        folderMovie.setName(Category.FAVORITE_MOVIES.getTranslation());
+                    }
+                    case 2 -> {
+                        folderMovie.setCategory(Category.VIEWED_MOVIES);
+                        folderMovie.setName(Category.VIEWED_MOVIES.getTranslation());
+                    }
+                }
+
+                folderMovie.setPrivacy(Privacy.PUBLIC);
+                folderMovie.setDescription("описание описание описание описание описание описание описание описание ");
+
+                Set<Movie> movies = new HashSet<>();
+                int amount = new Random().nextInt(5,26);
+                for (int j = 0; j < amount; j++) {
+                    movies.add(movieList.get(new Random().nextInt(0, movieList.size())));
+                }
+                folderMovie.setMovies(movies);
+
+                folderMovieService.save(folderMovie);
+            }
+        }
+    }
 }

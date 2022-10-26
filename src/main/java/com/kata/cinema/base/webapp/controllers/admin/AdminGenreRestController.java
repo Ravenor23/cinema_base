@@ -2,7 +2,7 @@ package com.kata.cinema.base.webapp.controllers.admin;
 
 import com.kata.cinema.base.models.dto.response.GenreResponseDto;
 import com.kata.cinema.base.models.entity.Genre;
-import com.kata.cinema.base.service.dto.impl.GenreService;
+import com.kata.cinema.base.service.dto.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
