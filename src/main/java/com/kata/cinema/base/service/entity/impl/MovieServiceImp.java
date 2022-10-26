@@ -4,8 +4,10 @@ import com.kata.cinema.base.models.entity.Movie;
 import com.kata.cinema.base.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 import com.kata.cinema.base.service.entity.MovieService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class MovieServiceImp implements MovieService {
@@ -23,5 +25,10 @@ public class MovieServiceImp implements MovieService {
     @Override
     public List<Movie> getAll() {
         return movieRepository.findAll();
+    }
+
+    @Override
+    public Movie findById(Long id) {
+        return movieRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 }
