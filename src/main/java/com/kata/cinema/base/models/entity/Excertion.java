@@ -1,7 +1,6 @@
 package com.kata.cinema.base.models.entity;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 
@@ -12,7 +11,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name = "excertion")
+@Table(name = "excertion", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_movies_person", columnNames = {"movie_id", "person_id"})})
 public class Excertion {
 
     @Id
@@ -22,11 +22,15 @@ public class Excertion {
     @Lob
     private String description;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "movies_id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
     private Person person;
 }

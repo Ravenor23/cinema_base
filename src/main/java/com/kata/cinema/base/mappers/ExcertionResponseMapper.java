@@ -12,6 +12,8 @@ import java.util.Optional;
 @Mapper(componentModel = "spring")
 public interface ExcertionResponseMapper {
     ExcertionResponseDto toDTO(Excertion excertion);
-    List<ExcertionResponseDto> modelsToDTO(Optional<Excertion> excertions);
+
+    List<ExcertionResponseDto> modelsToDTO(List<Excertion> excertions);
+
     Excertion toEntity(ExcertionResponseDto excertionResponseDto);
 }
