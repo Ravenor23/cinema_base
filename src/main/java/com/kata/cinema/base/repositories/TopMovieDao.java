@@ -1,4 +1,4 @@
-package com.kata.cinema.base.repositories.pagination;
+package com.kata.cinema.base.repositories;
 
 import java.io.IOException;
 import java.sql.SQLException;

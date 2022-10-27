@@ -1,6 +1,6 @@
 package com.kata.cinema.base.service.entity.impl;
 
-import com.kata.cinema.base.repositories.pagination.impl.TopMovieDaoImpl;
+import com.kata.cinema.base.repositories.impl.TopMovieDaoImpl;
 import com.kata.cinema.base.models.entity.TopMovie;
 import com.kata.cinema.base.repositories.TopMovieRepository;
 import com.kata.cinema.base.service.entity.MovieService;
