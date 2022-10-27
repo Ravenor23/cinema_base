@@ -20,6 +20,7 @@ public class SearchResponseService {
     private final SearchMovieListMapper searchMovieListMapper;
     private final SearchCollectionDtoRepository searchCollectionDtoRepository;
     private final SearchCollectionListMapper searchCollectionListMapper;
+
     private final SearchPersonDtoRepository searchPersonDtoRepository;
     private final SearchPersonListMapper searchPersonListMapper;
 
