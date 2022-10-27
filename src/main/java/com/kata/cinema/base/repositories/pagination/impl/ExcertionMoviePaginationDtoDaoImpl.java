@@ -6,9 +6,12 @@ import com.kata.cinema.base.repositories.pagination.ExcertionMoviePaginationDtoD
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 @Repository
+//TODO @Primary
+@Primary
 public class ExcertionMoviePaginationDtoDaoImpl implements ExcertionMoviePaginationDtoDao {
 
     private final ExcertionResponseMapper excertionResponseMapper;

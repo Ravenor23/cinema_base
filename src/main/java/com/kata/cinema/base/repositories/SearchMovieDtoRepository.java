@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SearchMovieDtoRepository extends JpaRepository<SearchMovieDto, Long> {
+public interface SearchMovieDtoRepository extends JpaRepository<Movie, Long> {
 
     List<Movie> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
 
