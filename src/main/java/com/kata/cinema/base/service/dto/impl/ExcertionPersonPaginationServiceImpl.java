@@ -2,17 +2,15 @@ package com.kata.cinema.base.service.dto.impl;
 
 import com.kata.cinema.base.models.dto.response.ExcertionResponseDto;
 import com.kata.cinema.base.models.dto.response.PageDto;
-import com.kata.cinema.base.models.dto.response.ScoreMovieResponseDto;
-import com.kata.cinema.base.repositories.PaginationDtoDao;
-import com.kata.cinema.base.service.ExcertionMoviePaginationDtoService;
-import org.springframework.stereotype.Service;
-
+import com.kata.cinema.base.repositories.pagination.PaginationDtoDao;
+import com.kata.cinema.base.service.dto.ExcertionMoviePaginationDtoService;
 import java.util.Map;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ExcertionPersonPaginationServiceImpl extends PaginationDtoServiceImpl<ExcertionResponseDto> implements ExcertionMoviePaginationDtoService {
 
-    public ExcertionPersonPaginationServiceImpl(PaginationDtoDao<ScoreMovieResponseDto> paginationDtoDao) {
+    public ExcertionPersonPaginationServiceImpl(PaginationDtoDao<ExcertionResponseDto> paginationDtoDao) {
         super(paginationDtoDao);
     }
 

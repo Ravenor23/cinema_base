@@ -1,7 +1,6 @@
-package com.kata.cinema.base.service;
+package com.kata.cinema.base.service.dto;
 
 import com.kata.cinema.base.models.dto.response.ReviewResponseDto;
-import com.kata.cinema.base.service.dto.PaginationDtoService;
 
 public interface ReviewPaginationDtoService<T> extends PaginationDtoService<ReviewResponseDto> {
 }

@@ -1,4 +1,4 @@
-package com.kata.cinema.base.repositories;
+package com.kata.cinema.base.repositories.pagination;
 
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
-package com.kata.cinema.base.dao.impl;
+package com.kata.cinema.base.repositories.pagination.impl;
 
-import com.kata.cinema.base.dao.TopMovieDao;
+import com.kata.cinema.base.repositories.pagination.TopMovieDao;
 import com.kata.cinema.base.repositories.TopMovieRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

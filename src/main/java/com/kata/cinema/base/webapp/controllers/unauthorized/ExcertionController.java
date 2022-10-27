@@ -3,8 +3,8 @@ package com.kata.cinema.base.webapp.controllers.unauthorized;
 import com.kata.cinema.base.models.dto.request.ExcertionRequestDto;
 import com.kata.cinema.base.models.dto.response.ExcertionResponseDto;
 import com.kata.cinema.base.models.dto.response.PageDto;
-import com.kata.cinema.base.service.ExcertionMoviePaginationDtoService;
-import com.kata.cinema.base.service.ExcertionPersonPaginationDtoService;
+import com.kata.cinema.base.service.dto.ExcertionMoviePaginationDtoService;
+import com.kata.cinema.base.service.dto.ExcertionPersonPaginationDtoService;
 import com.kata.cinema.base.service.dto.impl.ExcertionServiceImpl;
 import org.springframework.web.bind.annotation.*;
 

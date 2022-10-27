@@ -4,7 +4,7 @@ import com.kata.cinema.base.models.dto.response.PageDto;
 import com.kata.cinema.base.models.dto.response.ScoreMovieResponseDto;
 import com.kata.cinema.base.models.entity.Score;
 import com.kata.cinema.base.models.enums.SortScoreType;
-import com.kata.cinema.base.service.ScorePaginationDtoService;
+import com.kata.cinema.base.service.dto.ScorePaginationDtoService;
 import com.kata.cinema.base.service.dto.impl.ScoreMovieServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
