@@ -1,4 +1,4 @@
-package com.kata.cinema.base.dao;
+package com.kata.cinema.base.repositories;
 
 import java.io.IOException;
 import java.sql.SQLException;

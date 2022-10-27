@@ -4,7 +4,7 @@ import com.kata.cinema.base.models.dto.response.PageDto;
 import com.kata.cinema.base.models.dto.response.ReviewResponseDto;
 import com.kata.cinema.base.models.enums.ReviewSortType;
 import com.kata.cinema.base.models.enums.TypeReview;
-import com.kata.cinema.base.service.ReviewPaginationDtoService;
+import com.kata.cinema.base.service.dto.ReviewPaginationDtoService;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
