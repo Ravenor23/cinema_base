@@ -1,20 +1,19 @@
 package com.kata.cinema.base.repositories;
 
-import com.kata.cinema.base.models.dto.response.SearchPersonDto;
 import com.kata.cinema.base.models.entity.Person;
+import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface SearchPersonDtoRepository extends JpaRepository<SearchPersonDto, Long> {
+public interface SearchPersonDtoRepository extends JpaRepository<Person, Long> {
 
-    List<Person> findAllByFullNameContainingIgnoreCase(String name, Pageable pageable);
+    //TODO вместо FirstName должен быть FullName
+    List<Person> findAllByFirstNameContainingIgnoreCase(String name, Pageable pageable);
 
     default List<Person> findTop3ByFullNameContainingIgnoreCase(String name) {
-        return findAllByFullNameContainingIgnoreCase(name, PageRequest.of(0, 3));
+        return findAllByFirstNameContainingIgnoreCase(name, PageRequest.of(0, 3));
     }
 }
