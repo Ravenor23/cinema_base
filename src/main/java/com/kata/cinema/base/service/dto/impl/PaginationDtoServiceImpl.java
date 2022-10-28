@@ -8,9 +8,10 @@ import java.util.Map;
 
 public class PaginationDtoServiceImpl<T> implements PaginationDtoService<T> {
 
-    private PaginationDtoDao<T> paginationDtoDao;
+    private final PaginationDtoDao<T> paginationDtoDao;
 
     public PaginationDtoServiceImpl(PaginationDtoDao<T> paginationDtoDao) {
+        this.paginationDtoDao = paginationDtoDao;
     }
 
     @Override

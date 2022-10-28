@@ -2,7 +2,7 @@ package com.kata.cinema.base.repositories.pagination.impl;
 
 import com.kata.cinema.base.models.dto.response.ReviewResponseDto;
 import com.kata.cinema.base.models.enums.ReviewSortType;
-import com.kata.cinema.base.repositories.pagination.ReviewPaginationDtoDao;
+import com.kata.cinema.base.repositories.pagination.PaginationDtoDao;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ReviewPaginationDtoDaoImpl implements ReviewPaginationDtoDao {
+public class ReviewPaginationDtoDaoImpl implements PaginationDtoDao<ReviewResponseDto> {
 
   @PersistenceContext
   private EntityManager entityManager;
