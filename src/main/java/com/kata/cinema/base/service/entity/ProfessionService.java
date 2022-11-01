@@ -4,4 +4,5 @@ import com.kata.cinema.base.models.entity.Profession;
 
 public interface ProfessionService {
     void save(Profession profession);
+    Profession getById(Long id);
 }

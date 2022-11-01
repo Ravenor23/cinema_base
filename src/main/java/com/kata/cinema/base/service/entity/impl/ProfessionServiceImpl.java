@@ -20,4 +20,9 @@ public class ProfessionServiceImpl implements ProfessionService {
     public void save(Profession profession) {
         professionRepository.save(profession);
     }
+
+    @Override
+    public Profession getById(Long id) {
+        return professionRepository.getById(id);
+    }
 }

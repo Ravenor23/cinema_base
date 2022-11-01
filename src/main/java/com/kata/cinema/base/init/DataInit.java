@@ -3,7 +3,7 @@ package com.kata.cinema.base.init;
 import com.kata.cinema.base.models.entity.Collection;
 import com.kata.cinema.base.models.entity.*;
 import com.kata.cinema.base.models.enums.*;
-import com.kata.cinema.base.repositories.PersonRepository;
+import com.kata.cinema.base.models.enums.Profession;
 import com.kata.cinema.base.service.entity.*;
 import com.kata.cinema.base.service.entity.impl.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -27,10 +27,11 @@ public class DataInit {
     private final FolderMovieService folderMovieService;
     private final PersonService personService;
     private final ProfessionService professionService;
+    private final PersonMarriageService personMarriageService;
 
     public DataInit(MovieService movieService, GenreService genreService, CollectionServiceImp collectionService,
                     RoleService roleService, UserService userService, FolderMovieService folderMovieService, PersonService personService,
-                    ProfessionService professionService) {
+                    ProfessionService professionService, PersonMarriageService personMarriageService) {
         this.movieService = movieService;
         this.genreService = genreService;
         this.collectionService = collectionService;
@@ -39,6 +40,7 @@ public class DataInit {
         this.folderMovieService = folderMovieService;
         this.personService = personService;
         this.professionService = professionService;
+        this.personMarriageService = personMarriageService;
     }
 
     @PostConstruct
@@ -51,6 +53,7 @@ public class DataInit {
         createFolderMovie();
         createPerson();
         createProfession();
+        createPersonMarriage();
     }
 
     public void createGenre() {
@@ -203,12 +206,63 @@ public class DataInit {
 
     public void createProfession() {
         for (int i = 1; i <= 10; i++) {
-            Profession profession = new Profession();
-            List<PROFESSION> professionList = Arrays.asList(PROFESSION.values());
+            com.kata.cinema.base.models.entity.Profession profession = new com.kata.cinema.base.models.entity.Profession();
+            List<Profession> professionList = Arrays.asList(Profession.values());
             profession.setName(String.valueOf(professionList.get(new SecureRandom().nextInt(professionList.size()))));
             professionService.save(profession);
         }
     }
 
+    public void createMoviePerson() {
+        for (int i = 0; i < 10; i++) {
+            for (int k = 0; k < 3; k++) {
+                MoviePerson moviePerson = new MoviePerson();
+                moviePerson.setMovie(movieService.getById((long) i));
+
+                switch (k) {
+                    case 0 -> {
+                        for (int j = 1; j <= 3; j++) {
+                            moviePerson.setPerson(personService.getById((long) j));
+                            moviePerson.setType(TypeCharacter.MAIN_CHARACTER);
+                            moviePerson.setProfessions(Profession.ACTOR);
+                        }
+                    }
+                    case 1 -> {
+                        for (int j = 1; j <= 3; j++) {
+                            moviePerson.setPerson(personService.getById((long) j));
+                            moviePerson.setType(TypeCharacter.MINOR_CHARACTER);
+                            moviePerson.setProfessions(Profession.ACTOR);
+                        }
+                    }
+                    case 3-> {
+                        for (int j = 1; j <= 3; j++) {
+                            moviePerson.setPerson(personService.getById((long) j));
+                            moviePerson.setType(TypeCharacter.NO_CHARACTER_MOVIE);
+                            moviePerson.setProfessions();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public void createPersonMarriage() {
+        for (int i = 1; i <= 7; i++) {
+
+            PersonMarriage personMarriage = new PersonMarriage();
+            List<Person> listPerson = new ArrayList<>(personService.getAll());
+            personMarriage.setPerson(listPerson.get(new Random().nextInt(0, listPerson.size())));
+            personMarriage.setHuman((listPerson.get(new Random().nextInt(0, listPerson.size()))));
+            personMarriage.setMarriageStatus("marriage");
+            personMarriageService.save(personMarriage);
+        }
+    }
 
 }
+
+
+
+
+
+

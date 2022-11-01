@@ -6,6 +6,8 @@ import com.kata.cinema.base.service.entity.PersonService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class PersonServiceImpl implements PersonService {
 
@@ -18,6 +20,16 @@ public class PersonServiceImpl implements PersonService {
     @Transactional
     public void save(Person person) {
         personRepository.save(person);
+    }
+
+    @Override
+    public Person getById(Long id) {
+        return personRepository.getById(id);
+    }
+
+    @Override
+    public List<Person> getAll() {
+        return personRepository.findAll();
     }
 
 }

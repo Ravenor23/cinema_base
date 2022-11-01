@@ -2,7 +2,7 @@ package com.kata.cinema.base.models.enums;
 
 import lombok.Getter;
 
-public enum PROFESSION {
+public enum Profession {
     PRODUCER("Продюссер"),
     SCREENWRITER("Сценарист"),
     OPERATOR("Оператор"),
@@ -14,7 +14,7 @@ public enum PROFESSION {
     @Getter
     private final String translation;
 
-    PROFESSION(String translation) {
+    Profession(String translation) {
         this.translation = translation;
     }
 
