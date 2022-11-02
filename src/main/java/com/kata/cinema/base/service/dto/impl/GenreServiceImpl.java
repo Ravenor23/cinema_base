@@ -5,12 +5,11 @@ import com.kata.cinema.base.models.dto.response.GenreResponseDto;
 import com.kata.cinema.base.models.entity.Genre;
 import com.kata.cinema.base.repositories.GenreRepository;
 import com.kata.cinema.base.service.dto.GenreService;
+import java.util.List;
+import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -28,7 +27,6 @@ public class GenreServiceImpl implements GenreService {
 
     public List<GenreResponseDto> getAllGenre() {
         return genreMapper.modelsToDTO(genreRepository.findAll());
-
     }
 
     public Genre findGenreById(Long id) {

@@ -12,7 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonViewResponseDto {
-
   Long id;
   Double height;
   LocalDate birthday;
@@ -23,17 +22,5 @@ public class PersonViewResponseDto {
   List<GenreResponseDto> genres;
   List<ProfessionResponseDto> profession;
 
-  public PersonViewResponseDto(Long id, Double height, LocalDate birthday, String placeBirthday,
-      String photoUrl, String fullName, String originalFullName, List<GenreResponseDto> genres,
-      List<ProfessionResponseDto> profession) {
-    this.id = id;
-    this.height = height;
-    this.birthday = birthday;
-    this.placeBirthday = placeBirthday;
-    this.photoUrl = photoUrl;
-    this.fullName = fullName;
-    this.originalFullName = originalFullName;
-    this.genres = genres;
-    this.profession = profession;
-  }
+
 }
