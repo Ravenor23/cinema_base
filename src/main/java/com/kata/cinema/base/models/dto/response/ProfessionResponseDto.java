@@ -10,8 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfessionResponseDto {
-
-  Long id;
-  String name;
-
+  private Long id;
+  private String name;
 }

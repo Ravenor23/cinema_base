@@ -12,15 +12,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PersonViewResponseDto {
-  Long id;
-  Double height;
-  LocalDate birthday;
-  String placeBirthday;
-  String photoUrl;
-  String fullName;
-  String originalFullName;
-  List<GenreResponseDto> genres;
-  List<ProfessionResponseDto> profession;
-
-
+  private Long id;
+  private Double height;
+  private LocalDate birthday;
+  private String placeBirthday;
+  private String photoUrl;
+  private String fullName;
+  private String originalFullName;
+  private List<GenreResponseDto> genres;
+  private List<ProfessionResponseDto> profession;
 }

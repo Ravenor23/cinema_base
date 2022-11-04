@@ -10,6 +10,8 @@ public interface PersonViewResponseDtoMapper {
 
   @Mapping( target = "fullName", expression = "java(person.getFirstName() + \" \" + person.getLastName())")
   @Mapping( target = "originalFullName", expression = "java(person.getOriginalName() + \" \" + person.getOriginalLastName())")
+  @Mapping( target = "birthday", source = "dateBirth")
+  @Mapping( target = "placeBirthday", source = "placeBirth")
   PersonViewResponseDto toDTO(Person person);
 
 }
