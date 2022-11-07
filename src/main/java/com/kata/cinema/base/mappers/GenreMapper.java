@@ -2,19 +2,15 @@ package com.kata.cinema.base.mappers;
 
 import com.kata.cinema.base.models.dto.response.GenreResponseDto;
 import com.kata.cinema.base.models.entity.Genre;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
-
 import java.util.List;
+import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface GenreMapper {
 
-    GenreMapper INSTANCE = Mappers.getMapper(GenreMapper.class);
-
     GenreResponseDto toDTO (Genre genre);
 
-    List<GenreResponseDto> modelsToDTO (List<Genre> genre);
+    List<GenreResponseDto> modelsToDTO (List<Genre> genres);
 
     Genre toEntity (GenreResponseDto genreResponseDto);
 
