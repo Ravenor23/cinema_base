@@ -34,13 +34,13 @@ public class AdminOnlineSubscriptionRestController {
         return ResponseEntity.ok("added online");
     }
 
-    @PatchMapping("api/admin/movies/{id}/online/activate")
+    @PatchMapping("/{id}/online/activate")
     public ResponseEntity<?> enableOnline(@PathVariable("id") Long movieId) {
         availableOnlineService.activate(movieId);
         return ResponseEntity.ok("activated online");
     }
 
-    @PatchMapping("/api/admin/movies/{id}/online/deactivate")
+    @PatchMapping("/{id}/online/deactivate")
     public ResponseEntity<?> disableOnline(@PathVariable("id") Long movieId) {
         availableOnlineService.deactivate(movieId);
         return ResponseEntity.ok("deactivated online");
