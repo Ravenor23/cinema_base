@@ -1,25 +1,33 @@
 package com.kata.cinema.base.service.entity.impl;
 
+import com.kata.cinema.base.mappers.MovieMapper;
+import com.kata.cinema.base.models.dto.request.MovieRequestDto;
 import com.kata.cinema.base.models.entity.Movie;
 import com.kata.cinema.base.repositories.MovieRepository;
-import org.springframework.stereotype.Service;
 import com.kata.cinema.base.service.entity.MovieService;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.NoSuchElementException;
+import org.springframework.stereotype.Service;
 
 @Service
 public class MovieServiceImp implements MovieService {
     private final MovieRepository movieRepository;
 
-    public MovieServiceImp(MovieRepository movieRepository) {
+    private  final MovieMapper movieMapper;
+
+    public MovieServiceImp(MovieRepository movieRepository, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
+        this.movieMapper = movieMapper;
     }
 
     @Override
     public void save(Movie movie) {
         movieRepository.save(movie);
+    }
+
+    @Override
+    public void save(MovieRequestDto movieRequestDto) {
+        movieRepository.save(movieMapper.toEntity(movieRequestDto));
     }
 
     @Override
