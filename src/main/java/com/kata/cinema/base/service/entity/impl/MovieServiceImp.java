@@ -31,4 +31,9 @@ public class MovieServiceImp implements MovieService {
     public Movie findById(Long id) {
         return movieRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
+
+    @Override
+    public Movie getMovieByName(String name) {
+        return movieRepository.findMovieByName(name);
+    }
 }
