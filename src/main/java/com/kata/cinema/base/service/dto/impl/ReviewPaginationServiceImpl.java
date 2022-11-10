@@ -6,12 +6,10 @@ import com.kata.cinema.base.service.dto.ReviewPaginationDtoService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReviewPaginationServiceImpl extends
-    PaginationDtoServiceImpl<ReviewResponseDto> implements
-    ReviewPaginationDtoService {
+public class ReviewPaginationServiceImpl extends PaginationDtoServiceImpl<ReviewResponseDto>
+        implements ReviewPaginationDtoService {
 
-  public ReviewPaginationServiceImpl(
-      PaginationDtoDao<ReviewResponseDto> paginationDtoDao) {
+  public ReviewPaginationServiceImpl(PaginationDtoDao<ReviewResponseDto> paginationDtoDao) {
     super(paginationDtoDao);
   }
 }

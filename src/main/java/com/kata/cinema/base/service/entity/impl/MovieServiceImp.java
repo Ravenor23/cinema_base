@@ -31,6 +31,13 @@ public class MovieServiceImp implements MovieService {
     }
 
     @Override
+    public void updateMovie(Long id, MovieRequestDto movieRequestDto) {
+        Movie movie = movieMapper.toEntity(movieRequestDto);
+        movie.setId(id);
+        movieRepository.save(movieMapper.toEntity(movieRequestDto));
+    }
+
+    @Override
     public List<Movie> getAll() {
         return movieRepository.findAll();
     }

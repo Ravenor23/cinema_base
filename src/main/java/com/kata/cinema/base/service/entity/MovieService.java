@@ -9,5 +9,7 @@ public interface MovieService {
     void save(MovieRequestDto movieRequestDto);
     List<Movie> getAll();
     Movie findById(Long id);
-    public Movie getMovieByName(String name);
+    Movie getMovieByName(String name);
+
+    void updateMovie(Long id, MovieRequestDto movieRequestDto);
 }
