@@ -40,9 +40,8 @@ public class MovieServiceImp implements MovieService {
         return movieRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
-    public void updateMovie(Long id, MovieRequestDto movieRequestDto) {
-        Movie updateMovie = movieMapper.toEntity(movieRequestDto);
-        updateMovie.setId(id);
-        movieRepository.save(updateMovie);
+    @Override
+    public Movie getMovieByName(String name) {
+        return movieRepository.findMovieByName(name);
     }
 }

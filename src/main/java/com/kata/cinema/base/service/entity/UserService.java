@@ -7,4 +7,6 @@ public interface UserService {
     void save(User user);
 
     User getById(Long id);
+
+    User getUserByEmail(String email);
 }
