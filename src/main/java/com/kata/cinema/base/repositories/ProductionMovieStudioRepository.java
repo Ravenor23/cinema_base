@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductionMovieStudioRepository extends JpaRepository<ProductionStudioMovie, Long> {
 
-    @Query("select psm from ProductionStudioMovie psm left join fetch psm.performance")
+    @Query("select psm from ProductionStudioMovie psm left join fetch psm.studio s")
     ProductionStudioMovie findProductionStudioMovieById(Long id);
 }

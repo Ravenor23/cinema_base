@@ -14,4 +14,5 @@ public interface GenreService {
     void createGenre(GenreResponseDto genreResponseDto);
 
     void deleteById(Long id);
+
 }

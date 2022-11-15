@@ -27,7 +27,7 @@ public class ProductionMovieStudioServiceImpl implements ProductionMovieStudioSe
             ProductionStudioMovie productionStudioMovie = productionMovieStudioRepository.findProductionStudioMovieById(id);
             productionMovieStudioResponseDto.setId(id);
             productionMovieStudioResponseDto.setName(productionStudioMovie.getMovie().getName());
-            productionMovieStudioResponseDto.setStudioPerformance(productionStudioMovie.getPerformance());
+        //    productionMovieStudioResponseDto.setStudioPerformance(productionStudioMovie.getStudio().getPerformance());
         } else {
             throw new NoSuchElementException();
         }

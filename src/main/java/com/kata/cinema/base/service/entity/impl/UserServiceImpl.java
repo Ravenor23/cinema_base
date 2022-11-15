@@ -38,4 +38,8 @@ public class UserServiceImpl implements UserService {
     public User getById(Long id) {
         return userRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
 }
