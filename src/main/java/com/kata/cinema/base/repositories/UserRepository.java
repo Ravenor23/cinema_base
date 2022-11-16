@@ -15,5 +15,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select u from User u join fetch u.roles where u.email=?1")
     Optional<User> findByEmail(String email);
 
-
+    User findUserByEmail(String email);
 }

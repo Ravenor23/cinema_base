@@ -1,23 +1,43 @@
 package com.kata.cinema.base.init;
 
 import com.kata.cinema.base.models.dto.request.AvailableOnlineMovieRequestDto;
+import com.kata.cinema.base.models.entity.AvailableOnlineMovie;
 import com.kata.cinema.base.models.entity.Collection;
-import com.kata.cinema.base.models.entity.*;
+import com.kata.cinema.base.models.entity.FolderMovie;
+import com.kata.cinema.base.models.entity.Genre;
+import com.kata.cinema.base.models.entity.Movie;
+import com.kata.cinema.base.models.entity.PurchasedMovie;
+import com.kata.cinema.base.models.entity.Role;
+import com.kata.cinema.base.models.entity.User;
 import com.kata.cinema.base.models.enums.Category;
 import com.kata.cinema.base.models.enums.MPAA;
 import com.kata.cinema.base.models.enums.Privacy;
 import com.kata.cinema.base.models.enums.PurchaseType;
 import com.kata.cinema.base.models.enums.RARS;
-import com.kata.cinema.base.service.entity.*;
-import com.kata.cinema.base.service.entity.impl.*;
+import com.kata.cinema.base.service.entity.AvailableOnlineService;
+import com.kata.cinema.base.service.entity.CollectionService;
+import com.kata.cinema.base.service.entity.FolderMovieService;
+import com.kata.cinema.base.service.entity.GenreService;
+import com.kata.cinema.base.service.entity.MovieService;
+import com.kata.cinema.base.service.entity.PurchasedMovieService;
+import com.kata.cinema.base.service.entity.RoleService;
+import com.kata.cinema.base.service.entity.UserService;
+import com.kata.cinema.base.service.entity.impl.CollectionServiceImp;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component
@@ -32,8 +52,10 @@ public class DataInit {
     private final PurchasedMovieService purchasedMovieService;
     private final AvailableOnlineService availableOnlineService;
 
+    private final PasswordEncoder passwordEncoder;
+
     public DataInit(MovieService movieService, GenreService genreService, CollectionServiceImp collectionService,
-                    RoleService roleService, UserService userService, FolderMovieService folderMovieService, PurchasedMovieService purchasedMovieService, AvailableOnlineService availableOnlineService) {
+                    RoleService roleService, UserService userService, FolderMovieService folderMovieService, PurchasedMovieService purchasedMovieService, AvailableOnlineService availableOnlineService, PasswordEncoder passwordEncoder) {
         this.movieService = movieService;
         this.genreService = genreService;
         this.collectionService = collectionService;
@@ -42,6 +64,7 @@ public class DataInit {
         this.folderMovieService = folderMovieService;
         this.purchasedMovieService = purchasedMovieService;
         this.availableOnlineService = availableOnlineService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -123,7 +146,7 @@ public class DataInit {
             user.setEmail("email" + i + "@mail.ru");
             user.setFirstName("Имя" + i);
             user.setLastName("Фамилия" + i);
-            user.setPassword("password");
+            user.setPassword(passwordEncoder.encode("password"));
 
             LocalDate localDate = LocalDate.ofEpochDay(
                     ThreadLocalRandom.current().nextLong(
