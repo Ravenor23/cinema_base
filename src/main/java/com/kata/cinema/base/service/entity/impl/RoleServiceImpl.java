@@ -20,8 +20,8 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.save(role);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Role getByName(String name) {
-        return roleRepository.getByName(name);
+        return roleRepository.findByName(name);
     }
 }

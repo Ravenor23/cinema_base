@@ -1,5 +1,6 @@
 package com.kata.cinema.base.mappers;
 
+import com.kata.cinema.base.models.dto.request.UserRegistrationRequestDto;
 import com.kata.cinema.base.models.dto.response.UserResponseDto;
 import com.kata.cinema.base.models.entity.User;
 import org.mapstruct.AfterMapping;
@@ -21,6 +22,10 @@ public interface UserMapper {
     default List<UserResponseDto> toDTOList(List<User> userList) {
         return userList.stream().map(this::toDTO).toList();
     }
+
+
+    User toEntity(UserRegistrationRequestDto userRegistrationRequestDto);
+
 
     @AfterMapping
     default void setFullName(@MappingTarget UserResponseDto userResponseDto,
