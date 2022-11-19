@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,18 +20,13 @@ public class AdminOnlineSubscriptionRestController {
     public AdminOnlineSubscriptionRestController(AvailableOnlineService availableOnlineService) {
         this.availableOnlineService = availableOnlineService;
     }
+
     @PostMapping("/{id}/online")
     public ResponseEntity<?> addOnline(
             @PathVariable("id") Long movieId,
-            @RequestParam("availableOnline") AvailableOnlineMovieRequestDto availableOnline) {
-        if ((availableOnline.getAvailablePlus() == null) && (availableOnline.getBuyPrice() == null) ||
-                (availableOnline.getAvailablePlus() == null) && (availableOnline.getRentalPrice() == null) ||
-                ((availableOnline.getRentalPrice() == null) && (availableOnline.getBuyPrice() == null))
-                        && (availableOnline.getAvailablePlus() == null)) {
-            throw new NullPointerException();
-        }
+            @RequestBody AvailableOnlineMovieRequestDto availableOnline) {
         availableOnlineService.save(availableOnline, movieId);
-        return ResponseEntity.ok("added online");
+        return ResponseEntity.ok("Added online");
     }
 
     @PatchMapping("/{id}/online/activate")

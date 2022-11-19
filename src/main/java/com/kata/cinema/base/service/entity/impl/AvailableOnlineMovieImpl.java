@@ -1,5 +1,6 @@
 package com.kata.cinema.base.service.entity.impl;
 
+import com.kata.cinema.base.mappers.AvailableOnlineRequestMapper;
 import com.kata.cinema.base.models.dto.request.AvailableOnlineMovieRequestDto;
 import com.kata.cinema.base.models.entity.AvailableOnlineMovie;
 import com.kata.cinema.base.repositories.AvailableOnlineMovieRepository;
@@ -14,19 +15,28 @@ public class AvailableOnlineMovieImpl implements AvailableOnlineService {
 
     private final AvailableOnlineMovieRepository availableOnlineMovieRepository;
     private final MovieService movieService;
+    private final AvailableOnlineRequestMapper availableOnlineRequestMapper;
 
     public AvailableOnlineMovieImpl(AvailableOnlineMovieRepository availableOnlineMovieRepository,
-                                    MovieService movieService) {
+                                    MovieService movieService, AvailableOnlineRequestMapper availableOnlineRequestMapper) {
         this.availableOnlineMovieRepository = availableOnlineMovieRepository;
         this.movieService = movieService;
+        this.availableOnlineRequestMapper = availableOnlineRequestMapper;
     }
 
     @Override
     public void save(AvailableOnlineMovieRequestDto availableOnlineMovieDto, Long movieId) {
-        AvailableOnlineMovie availableOnlineMovie = new AvailableOnlineMovie();
-        availableOnlineMovie.setBuyPrice(availableOnlineMovieDto.getBuyPrice());
-        availableOnlineMovie.setRentalPrice(availableOnlineMovieDto.getRentalPrice());
-        availableOnlineMovie.setAvailablePlus(availableOnlineMovieDto.getAvailablePlus());
+        if ((availableOnlineMovieDto.getAvailablePlus() == null) &&
+                (availableOnlineMovieDto.getBuyPrice() == null) ||
+                (availableOnlineMovieDto.getAvailablePlus() == null) &&
+                        (availableOnlineMovieDto.getRentalPrice() == null) ||
+                ((availableOnlineMovieDto.getRentalPrice() == null) &&
+                        (availableOnlineMovieDto.getBuyPrice() == null)) &&
+                        (availableOnlineMovieDto.getAvailablePlus() == null)) {
+            throw new NullPointerException();
+        }
+        AvailableOnlineMovie availableOnlineMovie =
+                availableOnlineRequestMapper.toEntity(availableOnlineMovieDto);
         availableOnlineMovie.setMovie(movieService.findById(movieId));
 
         availableOnlineMovieRepository.save(availableOnlineMovie);
@@ -38,6 +48,7 @@ public class AvailableOnlineMovieImpl implements AvailableOnlineService {
                 availableOnlineMovieRepository.
                         findAvailableOnlineMovieByMovie(movieService.findById(movieId));
         availableOnlineMovie.setEnabled(true);
+
         availableOnlineMovieRepository.save(availableOnlineMovie);
     }
 
