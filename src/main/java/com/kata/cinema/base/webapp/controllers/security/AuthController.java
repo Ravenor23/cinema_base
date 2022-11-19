@@ -47,7 +47,7 @@ public class AuthController {
     @PostMapping("/authentication")
     public ResponseEntity<Map<String, String>> login(@RequestBody AuthRequestDto authRequestDto) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(authRequestDto.getUserName(), authRequestDto.getPassword());
+                new UsernamePasswordAuthenticationToken(authRequestDto.getUsername(), authRequestDto.getPassword());
 
         try {
             authenticationManager.authenticate(usernamePasswordAuthenticationToken);
@@ -55,7 +55,7 @@ public class AuthController {
             return new ResponseEntity<>(Map.of("error", "wrong password"), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(Map.of("token", jwtUtil.generateToken(authRequestDto.getUserName())),
+        return new ResponseEntity<>(Map.of("token", jwtUtil.generateToken(authRequestDto.getUsername())),
                 HttpStatus.OK);
 
     }
