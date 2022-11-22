@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 
+    Chapter findChapterByName(String name);
+
 }

@@ -30,7 +30,7 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public void deleteChapter(Long id) {
-        chapterRepository.deleteById(id);
+            chapterRepository.deleteById(id);
     }
 
     @Override
@@ -48,5 +48,10 @@ public class ChapterServiceImpl implements ChapterService {
     @Override
     public Chapter getById(Long id) {
         return chapterRepository.getById(id);
+    }
+
+    @Override
+    public Chapter getByName(String name) {
+        return chapterRepository.findChapterByName(name);
     }
 }

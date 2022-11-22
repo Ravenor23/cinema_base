@@ -17,4 +17,6 @@ public interface ChapterService {
 
     Chapter getById(Long id);
 
+    Chapter getByName(String name);
+
 }
