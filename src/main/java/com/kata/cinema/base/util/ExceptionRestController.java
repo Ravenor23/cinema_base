@@ -1,7 +1,10 @@
 package com.kata.cinema.base.util;
 
+import com.kata.cinema.base.exceptions.NoChapterException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.Instant;
 import java.util.Date;
@@ -11,5 +14,12 @@ public class ExceptionRestController extends RuntimeException {
     @ExceptionHandler
     public ErrorResponse errorResponse(final Exception e) {
         return new ErrorResponse(Date.from(Instant.now()), e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.value());
+    }
+
+    @ExceptionHandler(NoChapterException.class)
+    public ResponseEntity<ErrorResponse> emptyResultResponse(final Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse(Date.from(Instant.now()), e.getMessage(),
+                HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(errorResponse, errorResponse.getHttpStatus());
     }
 }

@@ -1,5 +1,6 @@
 package com.kata.cinema.base.webapp.controllers.admin;
 
+import com.kata.cinema.base.exceptions.NoChapterException;
 import com.kata.cinema.base.models.dto.response.ChapterResponseDto;
 import com.kata.cinema.base.service.dto.ChapterService;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,9 @@ public class AdminChapterRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteChapter(@PathVariable(name = "id") Long id) {
+
+        chapterService.getOptionalById(id).orElseThrow(() -> new NoChapterException(id));
+
         chapterService.deleteChapter(id);
         return ResponseEntity.ok(new StringBuilder()
                 .append("Chapter deleted. Id = ")
