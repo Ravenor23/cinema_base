@@ -4,6 +4,7 @@ import com.kata.cinema.base.models.dto.response.ChapterResponseDto;
 import com.kata.cinema.base.models.entity.Chapter;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ChapterService {
 
@@ -16,5 +17,9 @@ public interface ChapterService {
     List<ChapterResponseDto> getAllChapters();
 
     Chapter getById(Long id);
+
+    Chapter getByName(String name);
+
+    Optional<Chapter> getOptionalById(Long id);
 
 }
