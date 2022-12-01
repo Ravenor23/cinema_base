@@ -2,8 +2,13 @@ package com.kata.cinema.base.models.entity;
 
 import com.kata.cinema.base.models.enums.MPAA;
 import com.kata.cinema.base.models.enums.RARS;
-import java.time.LocalDate;
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,12 +23,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.Type;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -59,7 +60,7 @@ public class Movie {
     private MPAA mpaa;
 
     @Column(name = "time")
-    private String time;
+    private Integer time;
 
     @Lob
     @Type(type = "org.hibernate.type.TextType")

@@ -1,10 +1,25 @@
 package com.kata.cinema.base.models.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -20,7 +35,7 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sc_seq")
     @SequenceGenerator(name = "sc_seq",
             sequenceName = "sc_sequence",
-            initialValue = 1, allocationSize = 100)
+            allocationSize = 100)
     private Long id;
 
     @Column(name = "score")
@@ -28,11 +43,13 @@ public class Score {
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @ToString.Exclude
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "user_id")
     private User user;
 
