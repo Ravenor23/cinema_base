@@ -74,7 +74,7 @@ public class ScoreMovieServiceImpl implements ScoreMovieService {
     @Transactional
     public void deleteById(Long scoreId, String userName) {
         Score score = scoreMovieRepository.findById(scoreId).orElseThrow(() -> new NoScoreException(scoreId));
-        if (userService.getUserByEmail(userName).getId().equals(score.getUser().getId())) {
+        if (!userService.getUserByEmail(userName).getId().equals(score.getUser().getId())) {
             throw new WrongUserScoreException();
         }
         scoreMovieRepository.deleteById(scoreId);
