@@ -5,6 +5,7 @@ import com.kata.cinema.base.models.dto.request.PersonRequestDto;
 import com.kata.cinema.base.models.entity.Person;
 import com.kata.cinema.base.repositories.PersonRepositories;
 import com.kata.cinema.base.service.dto.PersonRequestDtoService;
+import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +27,9 @@ public class PersonRequestDtoServiceImpl implements PersonRequestDtoService {
 
     @Override
     public void update(Long id, PersonRequestDto personRequestDto) {
+        if (personRepositories.getPersonById(id) == null) {
+            throw new NoSuchElementException();
+        }
         Person person = personRequestDtoMapper.toEntity(personRequestDto);
         person.setId(id);
         personRepositories.save(person);
@@ -33,7 +37,7 @@ public class PersonRequestDtoServiceImpl implements PersonRequestDtoService {
 
     @Override
     public void delete(Long id) {
-        Person person = personRepositories.getPersonById(id);
+        Person person = personRepositories.findById(id).orElseThrow(NoSuchElementException::new);
         personRepositories.delete(person);
     }
 }

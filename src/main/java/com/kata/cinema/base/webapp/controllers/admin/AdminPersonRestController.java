@@ -2,6 +2,7 @@ package com.kata.cinema.base.webapp.controllers.admin;
 
 import com.kata.cinema.base.models.dto.request.PersonRequestDto;
 import com.kata.cinema.base.service.dto.PersonRequestDtoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +23,15 @@ public class AdminPersonRestController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addPerson(@RequestBody PersonRequestDto personRequestDto) {
+    public ResponseEntity<PersonRequestDto> addPerson(@RequestBody PersonRequestDto personRequestDto) {
         personRequestDtoService.save(personRequestDto);
-        return ResponseEntity.ok("added");
+        return new ResponseEntity<>(personRequestDto, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updatePerson(@RequestBody PersonRequestDto personRequestDto, @PathVariable Long id) {
+    public ResponseEntity<PersonRequestDto> updatePerson(@RequestBody PersonRequestDto personRequestDto, @PathVariable Long id) {
         personRequestDtoService.update(id, personRequestDto);
-        return ResponseEntity.ok("updated");
+        return new ResponseEntity<>(personRequestDto, HttpStatus.OK);
     }
 
     @DeleteMapping({"/{id}"})
