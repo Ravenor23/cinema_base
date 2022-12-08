@@ -8,6 +8,7 @@ INSERT INTO users (id, avatar_url, birthday, email, first_name, last_name, passw
 VALUES (102, null, '2000-01-11', 'user3@mail.ru', 'user3', 'userovich3',
         '$2a$12$/FIhv2k1jeNx5YCr6bZLlujKpN5V8V3j7qD16WtMC9Ov/tVhyjUIW'); -- password == 101
 
+
 INSERT INTO roles(id, name)
 VALUES (100, 'ADMIN');
 INSERT INTO roles(id, name)
@@ -41,7 +42,14 @@ VALUES (103, '2022-05-05', '4', 201, 101);
 insert into score (id, date, score, movie_id, user_id)
 VALUES (104, '2022-03-11', '7', 201, 102);
 insert into score (id, date, score, movie_id, user_id)
-VALUES (105, '2022-07-01', '1', 202, 100);
+VALUES (105, '2022-07-01', '2', 202, 100);
+
+
+
+
+
+
+
 
 
 

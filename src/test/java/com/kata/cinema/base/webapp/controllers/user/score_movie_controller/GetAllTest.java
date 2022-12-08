@@ -35,6 +35,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         DbUnitTestExecutionListener.class,
         SqlScriptsTestExecutionListener.class
 })
+@Sql(scripts = "/data/sql/controllers/scoreMovieController/get/init.sql")
+@Sql(scripts = "/data/sql/controllers/scoreMovieController/get/delete.sql",
+        executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class GetAllTest {
 
     @Autowired
@@ -61,23 +64,19 @@ public class GetAllTest {
             "Тор возвращается",
             "Thor comes back",
             LocalDate.of(2020, Month.APRIL, 12),
-            6.67,
+            6.666666666666667,
             3L);
     ScoreMovieResponseDto responseDto3 = new ScoreMovieResponseDto(105L,
-            1,
+            2,
             LocalDate.of(2022, Month.JULY, 1),
             777, 202L,
             "Веселье в Кентукки",
             "Happy Kentucky",
             LocalDate.of(2001, Month.MAY, 12),
-            1.0,
+            2.0,
             1L);
 
     @Test
-    @Sql(scripts = "/data/sql/controllers/scoreMovieController/get/init.sql",
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(scripts = "/data/sql/controllers/scoreMovieController/get/delete.sql",
-            executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void getAllTest() throws Exception {
         accessToken = obtainNewAccessToken("user1@mail.ru", "101", mockMvc);
 
@@ -86,33 +85,25 @@ public class GetAllTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/user/scores/page/1?itemsOnPage=2")
                         .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(testDto)));
+                .andExpect(content().string(objectMapper.writeValueAsString(testDto)));
 
     }
 
     @Test
-    @Sql(scripts = "/data/sql/controllers/scoreMovieController/get/init.sql",
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(scripts = "/data/sql/controllers/scoreMovieController/get/delete.sql",
-            executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void getAllScoreSortTest() throws Exception {
         accessToken = obtainNewAccessToken("user1@mail.ru", "101", mockMvc);
 
-        PageDto<ScoreMovieResponseDto> testDto = new PageDto<>(6L, List.of(responseDto3, responseDto1, responseDto2));
+        PageDto<ScoreMovieResponseDto> testDto = new PageDto<>(6L, List.of(responseDto1, responseDto3, responseDto2));
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/api/user/scores/page/1?itemsOnPage=3&sortScoreType=SCORE_ASC")
                         .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(testDto)));
+                .andExpect(content().string(objectMapper.writeValueAsString(testDto)));
 
     }
 
     @Test
-    @Sql(scripts = "/data/sql/controllers/scoreMovieController/get/init.sql",
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(scripts = "/data/sql/controllers/scoreMovieController/get/delete.sql",
-            executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void getAllNameSortTest() throws Exception {
         accessToken = obtainNewAccessToken("user1@mail.ru", "101", mockMvc);
 
@@ -122,15 +113,12 @@ public class GetAllTest {
                         .get("/api/user/scores/page/1?itemsOnPage=3&sortScoreType=NAME_ASC")
                         .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(testDto)));
+                .andExpect(content().string(objectMapper.writeValueAsString(testDto)))
+        ;
 
     }
 
     @Test
-    @Sql(scripts = "/data/sql/controllers/scoreMovieController/get/init.sql",
-            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(scripts = "/data/sql/controllers/scoreMovieController/get/delete.sql",
-            executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     public void getAllDateReleaseSortTest() throws Exception {
         accessToken = obtainNewAccessToken("user1@mail.ru", "101", mockMvc);
 
@@ -140,7 +128,21 @@ public class GetAllTest {
                         .get("/api/user/scores/page/1?itemsOnPage=3&sortScoreType=DATE_RELEASE_ASC")
                         .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(testDto)));
+                .andExpect(content().string(objectMapper.writeValueAsString(testDto)));
+
+    }
+
+    @Test
+    public void getAllCountSortTest() throws Exception {
+        accessToken = obtainNewAccessToken("user1@mail.ru", "101", mockMvc);
+
+        PageDto<ScoreMovieResponseDto> testDto = new PageDto<>(6L, List.of(responseDto3, responseDto1, responseDto2));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/user/scores/page/1?itemsOnPage=3&sortScoreType=COUNT_SCORE_ASC")
+                        .header("Authorization", "Bearer " + accessToken))
+                .andExpect(status().isOk())
+                .andExpect(content().string(objectMapper.writeValueAsString(testDto)));
 
     }
 

@@ -26,6 +26,7 @@ public interface ScoreMovieMapper {
         return scoreMovieResponseDto;
     }
 
+
     List<ScoreMovieResponseDto> toScoreMovieResponseDto(List<Score> scores);
 }
 
