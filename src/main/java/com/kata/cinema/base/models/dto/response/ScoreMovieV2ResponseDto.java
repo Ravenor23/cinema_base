@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ScoreMovieV2ResponseDto {
     private Long id;
-    private String time;
+    private Integer time;
     private String name;
     private String originalName;
     private LocalDate dateRelease;

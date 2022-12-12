@@ -45,6 +45,7 @@ public class StudioMoviesPaginationDtoDaoImpl implements StudioMoviesPaginationD
     public String sort(Map<String, Object> parameters) {
        if(parameters.get("sortScoreType") != null) {
             return switch ((SortScoreType) parameters.get("sortScoreType")) {
+                case DATE_ASC -> "order by m.time asc";
                 case NAME_ASC -> "order by m.name asc";
                 case COUNT_SCORE_ASC -> "order by count_score asc";
                 case SCORE_ASC -> "order by average_score asc";
