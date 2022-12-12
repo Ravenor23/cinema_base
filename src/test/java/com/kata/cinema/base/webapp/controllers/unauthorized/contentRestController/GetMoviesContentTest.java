@@ -47,13 +47,13 @@ public class GetMoviesContentTest {
     public void getMoviesContentTest() throws Exception {
 
         ContentResponseDto contentResponseDto1 =
-            new ContentResponseDto(1L, "https://www.example.ru", TypeContent.MOVIES);
+            new ContentResponseDto(100L, "https://www.example.ru", TypeContent.MOVIES);
         ContentResponseDto contentResponseDto2 =
-            new ContentResponseDto(2L, "https://www.example2.ru", TypeContent.PREVIEW);
+            new ContentResponseDto(101L, "https://www.example2.ru", TypeContent.PREVIEW);
         ContentResponseDto contentResponseDto3 =
-            new ContentResponseDto(3L, "https://www.example3.ru", TypeContent.TRAILER);
+            new ContentResponseDto(102L, "https://www.example3.ru", TypeContent.TRAILER);
 
-        mockMvc.perform(get("/api/movies/1/content"))
+        mockMvc.perform(get("/api/movies/100/content"))
                .andExpect(status().isOk())
                .andExpect(content().json(objectMapper.writeValueAsString(
                    List.of(contentResponseDto1, contentResponseDto2, contentResponseDto3)

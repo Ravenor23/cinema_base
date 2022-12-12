@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ContentResponseDto {
-    Long id;
-    String contentUrl;
-    TypeContent typeContent;
+    private Long id;
+    private String contentUrl;
+    private TypeContent typeContent;
 }
