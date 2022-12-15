@@ -1,10 +1,9 @@
 package com.kata.cinema.base.models.entity;
 
-import com.kata.cinema.base.models.enums.Type;
+import com.kata.cinema.base.models.enums.TypeContent;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -27,11 +26,15 @@ public class Content {
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private TypeContent type;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Person person;
 
     @Override
     public boolean equals(Object o) {
