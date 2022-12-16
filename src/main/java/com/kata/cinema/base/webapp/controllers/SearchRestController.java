@@ -24,7 +24,7 @@ public class SearchRestController {
 
 
     @GetMapping("/search")
-    public ResponseEntity<List<UserResponseDto>> searchUserResponseDto(@RequestParam (value = "email") String email) {
+    public ResponseEntity<List<UserResponseDto>> searchUserResponseDto(@RequestParam(value = "email") String email) {
         List<UserResponseDto> userResponseDtoList = userService.searchByEmail(email);
         return new ResponseEntity<>(userResponseDtoList, HttpStatus.OK);
     }

@@ -213,38 +213,38 @@ public class DataInit {
         }
     }
 
-    public void createMoviePerson() {
-        for (int i = 0; i < 10; i++) {
-            for (int k = 0; k < 3; k++) {
-                MoviePerson moviePerson = new MoviePerson();
-                moviePerson.setMovie(movieService.getById((long) i));
-
-                switch (k) {
-                    case 0 -> {
-                        for (int j = 1; j <= 3; j++) {
-                            moviePerson.setPerson(personService.getById((long) j));
-                            moviePerson.setType(TypeCharacter.MAIN_CHARACTER);
-                            moviePerson.setProfessions(Profession.ACTOR);
-                        }
-                    }
-                    case 1 -> {
-                        for (int j = 1; j <= 3; j++) {
-                            moviePerson.setPerson(personService.getById((long) j));
-                            moviePerson.setType(TypeCharacter.MINOR_CHARACTER);
-                            moviePerson.setProfessions(Profession.ACTOR);
-                        }
-                    }
-                    case 3-> {
-                        for (int j = 1; j <= 3; j++) {
-                            moviePerson.setPerson(personService.getById((long) j));
-                            moviePerson.setType(TypeCharacter.NO_CHARACTER_MOVIE);
-                            moviePerson.setProfessions();
-                        }
-                    }
-                }
-            }
-        }
-    }
+//     public void createMoviePerson() {
+//        for (int i = 0; i < 10; i++) {
+//            for (int k = 0; k < 3; k++) {
+//                MoviePerson moviePerson = new MoviePerson();
+//                moviePerson.setMovie(movieService.getById((long) i));
+//
+//                switch (k) {
+//                    case 0 -> {
+//                        for (int j = 1; j <= 3; j++) {
+//                            moviePerson.setPerson(personService.getById((long) j));
+//                            moviePerson.setType(TypeCharacter.MAIN_CHARACTER);
+//                            moviePerson.setProfessions(Profession.ACTOR);
+//                        }
+//                    }
+//                    case 1 -> {
+//                        for (int j = 1; j <= 3; j++) {
+//                            moviePerson.setPerson(personService.getById((long) j));
+//                            moviePerson.setType(TypeCharacter.MINOR_CHARACTER);
+//                            moviePerson.setProfessions(Profession.ACTOR);
+//                        }
+//                    }
+//                    case 3-> {
+//                        for (int j = 1; j <= 3; j++) {
+//                            moviePerson.setPerson(personService.getById((long) j));
+//                            moviePerson.setType(TypeCharacter.NO_CHARACTER_MOVIE);
+//                            moviePerson.setProfessions();
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 
     public void createPersonMarriage() {
