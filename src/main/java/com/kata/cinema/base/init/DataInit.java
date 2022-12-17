@@ -1,12 +1,14 @@
 package com.kata.cinema.base.init;
 
+import com.kata.cinema.base.models.dto.request.AvailableOnlineMovieRequestDto;
 import com.kata.cinema.base.models.entity.Collection;
 import com.kata.cinema.base.models.entity.*;
+import com.kata.cinema.base.models.entity.Profession;
 import com.kata.cinema.base.models.enums.*;
-import com.kata.cinema.base.models.enums.Profession;
 import com.kata.cinema.base.service.entity.*;
 import com.kata.cinema.base.service.entity.impl.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -28,10 +30,14 @@ public class DataInit {
     private final PersonService personService;
     private final ProfessionService professionService;
     private final PersonMarriageService personMarriageService;
+    private final PurchasedMovieService purchasedMovieService;
+    private final AvailableOnlineService availableOnlineService;
+
+    private final PasswordEncoder passwordEncoder;
 
     public DataInit(MovieService movieService, GenreService genreService, CollectionServiceImp collectionService,
-                    RoleService roleService, UserService userService, FolderMovieService folderMovieService, PersonService personService,
-                    ProfessionService professionService, PersonMarriageService personMarriageService) {
+                    RoleService roleService, UserService userService, FolderMovieService folderMovieService,
+                    PersonService personService, ProfessionService professionService, PersonMarriageService personMarriageService, PurchasedMovieService purchasedMovieService, AvailableOnlineService availableOnlineService, PasswordEncoder passwordEncoder) {
         this.movieService = movieService;
         this.genreService = genreService;
         this.collectionService = collectionService;
@@ -41,6 +47,9 @@ public class DataInit {
         this.personService = personService;
         this.professionService = professionService;
         this.personMarriageService = personMarriageService;
+        this.purchasedMovieService = purchasedMovieService;
+        this.availableOnlineService = availableOnlineService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -62,6 +71,7 @@ public class DataInit {
         }
     }
 
+    //  for commit
     public void createMovie() {
         for (int i = 1; i <= 100; i++) {
             Movie movie = new Movie();
@@ -86,21 +96,30 @@ public class DataInit {
             movie.setGenres(new HashSet<>(genreList.subList(genreList.size() - randomSize, genreList.size())));
 
             movieService.save(movie);
+
+            if (i % 2 == 0) {
+                AvailableOnlineMovieRequestDto availableOnlineDto = new AvailableOnlineMovieRequestDto();
+                availableOnlineDto.setAvailablePlus(true);
+                availableOnlineDto.setBuyPrice(i * 100);
+                availableOnlineDto.setRentalPrice(i * 20);
+                Movie movieForOnline = movieService.getMovieByName(movie.getName());
+                availableOnlineService.save(availableOnlineDto, movieForOnline.getId());
+            }
         }
     }
 
     public void createCollection() {
-        for (int i = 1; i <= 20; i++) {
-            boolean enable = !Arrays.asList(2, 6, 10, 14, 18).contains(i);
-            Collection collection = new Collection("Коллекция" + i, enable);
+            for (int i = 1; i <= 20; i++) {
+                boolean enable = !Arrays.asList(2, 6, 10, 14, 18).contains(i);
+                Collection collection = new Collection("Коллекция" + i, enable);
 
-            List<Movie> movieList = new ArrayList<>(movieService.getAll());
-            int randomSize = ThreadLocalRandom.current().nextInt(5, 16);
-            Collections.shuffle(movieList);
-            collection.setMovies(new HashSet<>(movieList.subList(movieList.size() - randomSize, movieList.size())));
+                List<Movie> movieList = new ArrayList<>(movieService.getAll());
+                int randomSize = ThreadLocalRandom.current().nextInt(5, 16);
+                Collections.shuffle(movieList);
+                collection.setMovies(new HashSet<>(movieList.subList(movieList.size() - randomSize, movieList.size())));
 
-            collectionService.save(collection);
-        }
+                collectionService.save(collection);
+            }
     }
 
     public void createRole() {
@@ -116,7 +135,7 @@ public class DataInit {
             user.setEmail("email" + i + "@mail.ru");
             user.setFirstName("Имя" + i);
             user.setLastName("Фамилия" + i);
-            user.setPassword("password");
+            user.setPassword(passwordEncoder.encode("password"));
 
             LocalDate localDate = LocalDate.ofEpochDay(
                     ThreadLocalRandom.current().nextLong(
@@ -142,6 +161,27 @@ public class DataInit {
             }
 
             userService.save(user);
+
+            for (int j = 1; j < 6; j++) {
+                PurchasedMovie purchasedMovie = new PurchasedMovie();
+                Random random = new Random();
+                List<AvailableOnlineMovie> availableOnlineMovieList = availableOnlineService.getAll();
+                int randomIndex = random.nextInt(availableOnlineMovieList.size());
+                AvailableOnlineMovie movieForPurchase = availableOnlineMovieList.get(randomIndex);
+
+                if (j % 2 == 0) {
+                    purchasedMovie.setPurchase(PurchaseType.BUY);
+                } else {
+                    purchasedMovie.setPurchase(PurchaseType.RENT);
+                }
+                purchasedMovie.setEndDate(LocalDate.ofEpochDay(ThreadLocalRandom.current()
+                        .nextLong(LocalDate.of(2022, Month.DECEMBER, 1).toEpochDay(),
+                                LocalDate.of(2025, 12, 1).toEpochDay())));
+                purchasedMovie.setUser(userService.getUserByEmail(user.getEmail()));
+                purchasedMovie.setMovie(movieForPurchase);
+
+                purchasedMovieService.save(purchasedMovie);
+            }
         }
     }
 
@@ -207,7 +247,7 @@ public class DataInit {
     public void createProfession() {
         for (int i = 1; i <= 10; i++) {
             com.kata.cinema.base.models.entity.Profession profession = new com.kata.cinema.base.models.entity.Profession();
-            List<Profession> professionList = Arrays.asList(Profession.values());
+            List<Profession> professionList = Arrays.asList(ProfessionType.values());
             profession.setName(String.valueOf(professionList.get(new SecureRandom().nextInt(professionList.size()))));
             professionService.save(profession);
         }
@@ -260,9 +300,3 @@ public class DataInit {
     }
 
 }
-
-
-
-
-
-

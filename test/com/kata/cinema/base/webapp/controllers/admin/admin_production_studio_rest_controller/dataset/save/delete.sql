@@ -1,1 +1,0 @@
-delete from production_studios where name = 'Ленфильм#TEST_NAME';

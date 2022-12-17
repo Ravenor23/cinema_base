@@ -1,21 +1,18 @@
 package com.kata.cinema.base.service.dto.impl;
 
-import com.kata.cinema.base.dao.PaginationDtoDao;
 import com.kata.cinema.base.models.dto.response.PageDto;
-import com.kata.cinema.base.models.dto.response.ScoreMovieResponseDto;
+import com.kata.cinema.base.repositories.pagination.PaginationDtoDao;
 import com.kata.cinema.base.service.dto.PaginationDtoService;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-@Service
 public class PaginationDtoServiceImpl<T> implements PaginationDtoService<T> {
 
-    private PaginationDtoDao<T> paginationDtoDao;
+    private final PaginationDtoDao<T> paginationDtoDao;
 
-    public PaginationDtoServiceImpl(PaginationDtoDao<ScoreMovieResponseDto> paginationDtoDao) {
+    public PaginationDtoServiceImpl(PaginationDtoDao<T> paginationDtoDao) {
+        this.paginationDtoDao = paginationDtoDao;
     }
 
     @Override

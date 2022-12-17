@@ -1,10 +1,23 @@
 package com.kata.cinema.base.models.entity;
-import lombok.*;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -37,15 +50,14 @@ public class Person {
     @Column(name = "place_of_birth")
     private String placeBirth;
 
-    @Column(name = "originalName")
-    private String originalName;
-
-    @Column(name = "originalLastName")
-    private String originalLastName;
-
-    @Column(name = "photoUrl")
+    @Column(name = "photo_url")
     private String photoUrl;
 
+    @Column(name = "original_name")
+    private String originalName ;
+
+    @Column(name = "original_last_name")
+    private String originalLastName ;
 
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)

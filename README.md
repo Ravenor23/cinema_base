@@ -63,12 +63,13 @@
 ![img_7.png](src/main/resources/static/images/git_tutor/img_7.png)
 
 ## 4. Получение JWT токена.
-/api/registration - регистрируем нового пользователя (по умолчанию получает роль ENROLLEE)
+/api/registration - регистрируем нового пользователя (по умолчанию получает роль USER)
 ![5_token_1.png](src/main/resources/static/images/git_tutor/5_token_1.png)
 /api/authentication - отправлеям логин и пароль только что зарегистрированного
 пользователя или существующего из БД. В ответе получаем JWT - токен.
 ![5_token_2.png](src/main/resources/static/images/git_tutor/5_token_2.png)
-Копируем полученный токен и вставляем вкладка Authorization Type: Bearer Token
+Копируем полученный токен и вставляем во вкладку Authorization Type: Bearer Token, в конце запроса
+должен быть указан Id пользователя, который получил токен
 ![5_token_3.png](src/main/resources/static/images/git_tutor/5_token_3.png)
 Авторизованные реквесты:
 ![5_token_4.png](src/main/resources/static/images/git_tutor/5_token_4.png)
