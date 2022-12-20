@@ -2,7 +2,7 @@ package com.kata.cinema.base.models.enums;
 
 import lombok.Getter;
 
-public enum Profession {
+public enum ProfessionName {
     PRODUCER("Продюссер"),
     SCREENWRITER("Сценарист"),
     OPERATOR("Оператор"),
@@ -14,13 +14,18 @@ public enum Profession {
     @Getter
     private final String translation;
 
-    Profession(String translation) {
+    ProfessionName(String translation) {
         this.translation = translation;
     }
 
-    @Override
-    public String toString() {
-        return " + translation + ";
+    public static ProfessionName ofName(String name){
+        for (ProfessionName value : ProfessionName.values()) {
+            if (value.getTranslation().equals(name)){
+                return value;
+            }
+        }
+
+        throw new IllegalArgumentException("Couldn't find ProfessionName for name: " + name);
     }
 }
 

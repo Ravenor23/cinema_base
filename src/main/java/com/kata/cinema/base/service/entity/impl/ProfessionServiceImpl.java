@@ -6,6 +6,9 @@ import com.kata.cinema.base.service.entity.ProfessionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
+
 @Service
 public class ProfessionServiceImpl implements ProfessionService {
 
@@ -24,5 +27,15 @@ public class ProfessionServiceImpl implements ProfessionService {
     @Override
     public Profession getById(Long id) {
         return professionRepository.getById(id);
+    }
+
+    @Override
+    public List<Profession> getProfessions() {
+        return professionRepository.findAll();
+    }
+
+    @Override
+    public void deleteProfession(long professionId) {
+        professionRepository.deleteById(professionId);
     }
 }

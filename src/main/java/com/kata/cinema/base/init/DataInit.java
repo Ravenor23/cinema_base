@@ -22,6 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @ConditionalOnExpression("${app.initializer.runInitialize}")
 public class DataInit {
     private final MovieService movieService;
+    private final MoviePersonService moviePersonService;
     private final GenreService genreService;
     private final CollectionService collectionService;
     private final RoleService roleService;
@@ -35,10 +36,11 @@ public class DataInit {
 
     private final PasswordEncoder passwordEncoder;
 
-    public DataInit(MovieService movieService, GenreService genreService, CollectionServiceImp collectionService,
+    public DataInit(MovieService movieService, MoviePersonService moviePersonService, GenreService genreService, CollectionServiceImp collectionService,
                     RoleService roleService, UserService userService, FolderMovieService folderMovieService,
                     PersonService personService, ProfessionService professionService, PersonMarriageService personMarriageService, PurchasedMovieService purchasedMovieService, AvailableOnlineService availableOnlineService, PasswordEncoder passwordEncoder) {
         this.movieService = movieService;
+        this.moviePersonService = moviePersonService;
         this.genreService = genreService;
         this.collectionService = collectionService;
         this.roleService = roleService;
@@ -62,6 +64,7 @@ public class DataInit {
         createFolderMovie();
         createPerson();
         createProfession();
+        createMoviePerson();
         createPersonMarriage();
     }
 
@@ -76,9 +79,12 @@ public class DataInit {
         for (int i = 1; i <= 100; i++) {
             Movie movie = new Movie();
             movie.setName("фильм" + i);
-            movie.setDataRelease(LocalDate.ofEpochDay(ThreadLocalRandom.current()
-                    .nextLong(LocalDate.of(1990, Month.JANUARY, 1).toEpochDay(),
-                            LocalDate.now().toEpochDay())));
+            movie.setDataRelease(LocalDate.ofEpochDay(
+                    ThreadLocalRandom.current().nextLong(
+                            LocalDate.of(1990, Month.JANUARY, 1).toEpochDay(), //origin
+                            LocalDate.now().toEpochDay() //bound
+                    )
+            ));
             movie.setDescription("описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма\n" +
                     "описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма\n" +
                     "описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма описание фильма\n" +
@@ -245,46 +251,53 @@ public class DataInit {
     }
 
     public void createProfession() {
-        for (int i = 1; i <= 10; i++) {
-            com.kata.cinema.base.models.entity.Profession profession = new com.kata.cinema.base.models.entity.Profession();
-            List<Profession> professionList = Arrays.asList(ProfessionType.values());
-            profession.setName(String.valueOf(professionList.get(new SecureRandom().nextInt(professionList.size()))));
+        ProfessionName[] professionNames = ProfessionName.values();
+        for (ProfessionName professionName : professionNames) {
+            Profession profession = new Profession();
+            profession.setName(professionName.getTranslation());
             professionService.save(profession);
         }
     }
 
-//     public void createMoviePerson() {
-//        for (int i = 0; i < 10; i++) {
-//            for (int k = 0; k < 3; k++) {
-//                MoviePerson moviePerson = new MoviePerson();
-//                moviePerson.setMovie(movieService.getById((long) i));
-//
-//                switch (k) {
-//                    case 0 -> {
-//                        for (int j = 1; j <= 3; j++) {
-//                            moviePerson.setPerson(personService.getById((long) j));
-//                            moviePerson.setType(TypeCharacter.MAIN_CHARACTER);
-//                            moviePerson.setProfessions(Profession.ACTOR);
-//                        }
-//                    }
-//                    case 1 -> {
-//                        for (int j = 1; j <= 3; j++) {
-//                            moviePerson.setPerson(personService.getById((long) j));
-//                            moviePerson.setType(TypeCharacter.MINOR_CHARACTER);
-//                            moviePerson.setProfessions(Profession.ACTOR);
-//                        }
-//                    }
-//                    case 3-> {
-//                        for (int j = 1; j <= 3; j++) {
-//                            moviePerson.setPerson(personService.getById((long) j));
-//                            moviePerson.setType(TypeCharacter.NO_CHARACTER_MOVIE);
-//                            moviePerson.setProfessions();
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    public void createMoviePerson() {
+        List<Profession> professions = professionService.getProfessions();
+        List<Profession> nonActors = new ArrayList<>();
+        Profession actor = null;
+        for (Profession profession : professions) {
+            if (ProfessionName.ACTOR.getTranslation().equals(profession.getName())) {
+                actor = profession;
+                continue;
+            }
+            nonActors.add(profession);
+        }
+        for (Movie movie : movieService.getAll()) {
+            List<Person> allPersons = personService.getAll();
+            Set<Person> randomPersons = new HashSet<>();
+            while (randomPersons.size() < 10) {
+                Person person = allPersons.get(new Random().nextInt(0, allPersons.size()));
+                randomPersons.add(person);
+            }
+
+            List<Person> people = new ArrayList<>(randomPersons);
+            for (int i = 0; i < people.size(); i++) {
+                MoviePerson moviePerson = new MoviePerson();
+                moviePerson.setId(new MoviePerson.Id(people.get(i).getId(), movie.getId()));
+                moviePerson.setMovie(movie);
+                moviePerson.setPerson(people.get(i));
+                if (i < 3) {
+                    moviePerson.setType(TypeCharacter.MAIN_CHARACTER);
+                    moviePerson.setProfessions(actor);
+                } else if (i < 6) {
+                    moviePerson.setType(TypeCharacter.MINOR_CHARACTER);
+                    moviePerson.setProfessions(actor);
+                } else {
+                    moviePerson.setType(TypeCharacter.NO_CHARACTER_MOVIE);
+                    moviePerson.setProfessions(nonActors.get(new Random().nextInt(0, nonActors.size())));
+                }
+                moviePersonService.save(moviePerson);
+            }
+        }
+    }
 
 
     public void createPersonMarriage() {
