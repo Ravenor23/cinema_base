@@ -4,16 +4,16 @@ import com.kata.cinema.base.mappers.MovieMapper;
 import com.kata.cinema.base.models.dto.request.MovieRequestDto;
 import com.kata.cinema.base.models.entity.Movie;
 import com.kata.cinema.base.repositories.MovieRepository;
+import org.springframework.stereotype.Service;
 import com.kata.cinema.base.service.entity.MovieService;
+
 import java.util.List;
 import java.util.NoSuchElementException;
-import org.springframework.stereotype.Service;
 
 @Service
 public class MovieServiceImp implements MovieService {
     private final MovieRepository movieRepository;
-
-    private  final MovieMapper movieMapper;
+    private final MovieMapper movieMapper;
 
     public MovieServiceImp(MovieRepository movieRepository, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
@@ -40,6 +40,11 @@ public class MovieServiceImp implements MovieService {
     @Override
     public List<Movie> getAll() {
         return movieRepository.findAll();
+    }
+
+    @Override
+    public Movie getById(Long id) {
+        return movieRepository.getById(id);
     }
 
     @Override

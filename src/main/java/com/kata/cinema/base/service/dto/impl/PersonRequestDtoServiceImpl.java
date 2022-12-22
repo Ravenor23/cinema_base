@@ -3,7 +3,7 @@ package com.kata.cinema.base.service.dto.impl;
 import com.kata.cinema.base.mappers.PersonRequestDtoMapper;
 import com.kata.cinema.base.models.dto.request.PersonRequestDto;
 import com.kata.cinema.base.models.entity.Person;
-import com.kata.cinema.base.repositories.PersonRepositories;
+import com.kata.cinema.base.repositories.PersonRepository;
 import com.kata.cinema.base.service.dto.PersonRequestDtoService;
 import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonRequestDtoServiceImpl implements PersonRequestDtoService {
 
-    private final PersonRepositories personRepositories;
+    private final PersonRepository personRepositories;
     private final PersonRequestDtoMapper personRequestDtoMapper;
 
-    public PersonRequestDtoServiceImpl(PersonRepositories personRepositories,
+    public PersonRequestDtoServiceImpl(PersonRepository personRepositories,
                                        PersonRequestDtoMapper personRequestDtoMapper) {
         this.personRepositories = personRepositories;
         this.personRequestDtoMapper = personRequestDtoMapper;

@@ -47,7 +47,7 @@ public class MoviePerson {
 
     @ToString.Exclude
     @ManyToOne(targetEntity = Profession.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "profession_id", insertable = false, updatable = false)
+    @JoinColumn(name = "profession_id")
     private Profession professions;
 
     @Enumerated(EnumType.STRING)
