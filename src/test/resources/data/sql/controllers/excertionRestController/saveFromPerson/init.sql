@@ -1,0 +1,2 @@
+INSERT INTO persons (id, date_birth, first_name, height, last_name, original_last_name, original_name, photo_url, place_of_birth)
+VALUES (101, '1982-12-4', 'Patrick', 182.3, 'Bateman', 'Bale', 'Christian', null, 'England');

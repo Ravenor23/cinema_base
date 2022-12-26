@@ -21,8 +21,8 @@ public class ExcertionPersonPaginationDtoDaoImpl implements ExcertionPersonPagin
     @Override
     public List<ExcertionResponseDto> getItemsDto(Integer currentPage, Integer itemsOnPage, Map<String, Object> parameters) {
         return excertionResponseMapper.modelsToDTO(entityManager
-                .createQuery("select e from Excertion e where e.person=:person")
-                .setParameter("person", parameters.get("person"))
+                .createQuery("select e from Excertion e where e.person.id=:id")
+                .setParameter("id", parameters.get("person_id"))
                 .setFirstResult((currentPage - 1) * itemsOnPage)
                 .setMaxResults(itemsOnPage)
                 .getResultList());

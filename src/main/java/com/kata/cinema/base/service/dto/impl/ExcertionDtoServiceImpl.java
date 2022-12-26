@@ -4,6 +4,7 @@ import com.kata.cinema.base.mappers.ExcertionRequestMapper;
 import com.kata.cinema.base.models.dto.request.ExcertionRequestDto;
 import com.kata.cinema.base.models.entity.Excertion;
 import com.kata.cinema.base.repositories.ExcertionRepository;
+import com.kata.cinema.base.service.dto.ExcertionDtoService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @EnableAutoConfiguration
-public class ExcertionServiceImpl {
+public class ExcertionDtoServiceImpl implements ExcertionDtoService {
 
     private final ExcertionRepository excertionRepository;
     private final ExcertionRequestMapper excertionRequestMapper;
 
-    public ExcertionServiceImpl(ExcertionRepository excertionRepository, ExcertionRequestMapper excertionRequestMapper) {
+    public ExcertionDtoServiceImpl(ExcertionRepository excertionRepository, ExcertionRequestMapper excertionRequestMapper) {
         this.excertionRepository = excertionRepository;
         this.excertionRequestMapper = excertionRequestMapper;
     }

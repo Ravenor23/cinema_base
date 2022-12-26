@@ -1,6 +1,7 @@
 package com.kata.cinema.base.models.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -20,6 +21,7 @@ public class Excertion {
     private Long id;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
 
     @ToString.Exclude
