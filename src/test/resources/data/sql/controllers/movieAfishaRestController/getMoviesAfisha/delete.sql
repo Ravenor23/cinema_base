@@ -1,0 +1,9 @@
+delete from score;
+delete from movie_tickets;
+delete from movie_genre;
+delete from genres;
+delete from movie_person;
+delete from movies;
+delete from persons;
+delete from professions;
+delete from users;

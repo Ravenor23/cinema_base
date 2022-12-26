@@ -23,5 +23,17 @@ public class MovieResponseDto {
     private String genres;
     private String director;
     private String roles;
-    private Integer countScore;
+    private Long countScore;
+
+    public MovieResponseDto(Long id, String name, String originalName, Integer time, LocalDate dateRelease,
+                            String countries, Long countScore) {
+        this.id = id;
+        this.name = name;
+        this.originalName = originalName;
+        this.time = time;
+        this.dateRelease = dateRelease;
+        this.countries = countries;
+        this.countScore = countScore;
+    }
+
 }

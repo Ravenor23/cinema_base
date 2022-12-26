@@ -13,4 +13,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query("from Movie where dataRelease =:currentDate")
     List<Movie> findByDataRelease(LocalDate currentDate);
+
+    @Query("from Movie where id in :movieId")
+    List<Movie> getMoviesById(List<Long> movieId);
 }
