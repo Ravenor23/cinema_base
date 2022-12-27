@@ -7,8 +7,8 @@ import com.kata.cinema.base.models.dto.response.GenreResponseDto;
 import com.kata.cinema.base.models.dto.response.PersonViewResponseDto;
 import com.kata.cinema.base.models.dto.response.ProfessionResponseDto;
 import com.kata.cinema.base.repositories.GenreRepository;
-import com.kata.cinema.base.repositories.PersonRepositories;
-import com.kata.cinema.base.repositories.ProfessionRepositories;
+import com.kata.cinema.base.repositories.PersonRepository;
+import com.kata.cinema.base.repositories.ProfessionRepository;
 import com.kata.cinema.base.service.dto.PersonViewResponseDtoService;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -16,17 +16,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonViewResponseDtoServiceImpl implements PersonViewResponseDtoService {
 
-  private final PersonRepositories personRepositories;
+  private final PersonRepository personRepositories;
   private final PersonViewResponseDtoMapper personViewResponseDtoMapper;
   private final GenreRepository genreRepository;
   private final GenreMapper genreMapper;
-  private final ProfessionRepositories professionRepositories;
+  private final ProfessionRepository professionRepositories;
   private final ProfessionMapper professionMapper;
 
-  public PersonViewResponseDtoServiceImpl(PersonRepositories personRepositories,
-      PersonViewResponseDtoMapper personViewResponseDtoMapper, GenreRepository genreRepository,
-      GenreMapper genreMapper, ProfessionRepositories professionRepositories,
-      ProfessionMapper professionMapper) {
+  public PersonViewResponseDtoServiceImpl(PersonRepository personRepositories,
+                                          PersonViewResponseDtoMapper personViewResponseDtoMapper, GenreRepository genreRepository,
+                                          GenreMapper genreMapper, ProfessionRepository professionRepositories,
+                                          ProfessionMapper professionMapper) {
     this.personRepositories = personRepositories;
     this.personViewResponseDtoMapper = personViewResponseDtoMapper;
     this.genreRepository = genreRepository;

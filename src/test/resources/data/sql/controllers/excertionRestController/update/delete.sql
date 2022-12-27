@@ -1,0 +1,1 @@
+delete from excertion e where e.id=101;

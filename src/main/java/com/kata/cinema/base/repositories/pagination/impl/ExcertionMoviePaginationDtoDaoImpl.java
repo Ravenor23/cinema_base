@@ -22,8 +22,8 @@ public class ExcertionMoviePaginationDtoDaoImpl implements ExcertionMoviePaginat
     @Override
     public List<ExcertionResponseDto> getItemsDto(Integer currentPage, Integer itemsOnPage, Map<String, Object> parameters) {
         return excertionResponseMapper.modelsToDTO(entityManager
-                .createQuery("select e from Excertion e where e.movie=:movie")
-                .setParameter("movie", parameters.get("movie"))
+                .createQuery("select e from Excertion e where e.movie.id=:id")
+                .setParameter("id", parameters.get("movie_id"))
                 .setFirstResult((currentPage - 1) * itemsOnPage)
                 .setMaxResults(itemsOnPage)
                 .getResultList());

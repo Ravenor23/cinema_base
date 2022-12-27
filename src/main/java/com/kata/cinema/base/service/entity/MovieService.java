@@ -8,8 +8,8 @@ public interface MovieService {
     void save(Movie movie);
     void save(MovieRequestDto movieRequestDto);
     List<Movie> getAll();
+    Movie getById(Long id);
     Movie findById(Long id);
     Movie getMovieByName(String name);
-
     void updateMovie(Long id, MovieRequestDto movieRequestDto);
 }
