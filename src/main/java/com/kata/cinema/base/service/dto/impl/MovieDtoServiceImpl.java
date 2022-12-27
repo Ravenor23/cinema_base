@@ -1,12 +1,10 @@
 package com.kata.cinema.base.service.dto.impl;
 
-import com.kata.cinema.base.mappers.GenreDtoMapper;
 import com.kata.cinema.base.models.dto.response.DirectorMovieDto;
 import com.kata.cinema.base.models.dto.response.GenreMovieDto;
 import com.kata.cinema.base.models.dto.response.MovieResponseDto;
 import com.kata.cinema.base.models.dto.response.PageDto;
 import com.kata.cinema.base.models.dto.response.RoleMovieDto;
-import com.kata.cinema.base.models.entity.Movie;
 import com.kata.cinema.base.repositories.MoviePersonRepository;
 import com.kata.cinema.base.repositories.MovieRepository;
 import com.kata.cinema.base.repositories.MovieTicketRepository;
@@ -22,24 +20,20 @@ public class MovieDtoServiceImpl implements MovieDtoService {
     private final MovieTicketRepository movieTicketRepository;
     private final MoviePersonRepository moviePersonRepository;
     private final MovieRepository movieRepository;
-    private final GenreDtoMapper genreDtoMapper;
 
     public MovieDtoServiceImpl(MovieTicketRepository movieTicketRepository,
                                MovieRepository movieRepository,
-                               MoviePersonRepository moviePersonRepository,
-                               GenreDtoMapper genreDtoMapper) {
+                               MoviePersonRepository moviePersonRepository) {
         this.movieTicketRepository = movieTicketRepository;
         this.moviePersonRepository = moviePersonRepository;
         this.movieRepository = movieRepository;
-        this.genreDtoMapper = genreDtoMapper;
     }
 
     @Override
     @Transactional
     public PageDto<MovieResponseDto> getMoviesAfishaByGenre(Long genreId) {
-        List<MovieResponseDto> movieTicket = movieTicketRepository.findAllAndOrderByEndShowDate(genreId);
 
-        List<GenreMovieDto> movieResponseDtoList = new ArrayList<>();
+        List<MovieResponseDto> movieTicket = movieTicketRepository.findAllAndOrderByEndShowDate(genreId);
 
         List<Long> movieResponseIdList = new ArrayList<>();
 
@@ -48,38 +42,33 @@ public class MovieDtoServiceImpl implements MovieDtoService {
             movieResponseIdList.add(movieResponseDto.getId());
         }
 
-        List<Movie> moviesById = movieRepository.getMoviesById(movieResponseIdList);
-
-        for (Movie movie : moviesById) {
-            movieResponseDtoList.add(genreDtoMapper.toDto(movie));
-        }
-
-        for (MovieResponseDto responseDto : movieTicket) {
-
-            for (GenreMovieDto genreMovieDto : movieResponseDtoList) {
-                if (responseDto.getId().equals(genreMovieDto.getMovieId())) {
-                    responseDto.setGenres(genreMovieDto.getGenres());
-                }
-            }
-        }
+        List<GenreMovieDto> moviesGenreById = movieRepository.getMoviesById(movieResponseIdList);
 
         List<RoleMovieDto> roleMovieDtos = moviePersonRepository.getRoles(movieResponseIdList);
-
-        for (MovieResponseDto responseDto : movieTicket) {
-
-            for (RoleMovieDto roleMovieDto : roleMovieDtos) {
-                if (responseDto.getId().equals(roleMovieDto.getMovieId())) {
-                    responseDto.setRoles(roleMovieDto.getName());
-                }
-            }
-        }
 
         List<DirectorMovieDto> directorMovieDtos = moviePersonRepository.getDirectorName(movieResponseIdList);
 
         for (MovieResponseDto responseDto : movieTicket) {
+            Long movieId = responseDto.getId();
+            for (GenreMovieDto genreMovieDto : moviesGenreById) {
+                if (movieId.equals(genreMovieDto.getMovieId())) {
+                    if (responseDto.getGenres() == null) {
+                        responseDto.setGenres(genreMovieDto.getGenres() + ", ");
+                    } else {
+                        responseDto.setGenres(responseDto.getGenres() + genreMovieDto.getGenres() + ", ");
+                    }
+                }
+            }
+            responseDto.setGenres(responseDto.getGenres().substring(0, responseDto.getGenres().length() - 2));
+
+            for (RoleMovieDto roleMovieDto : roleMovieDtos) {
+                if (movieId.equals(roleMovieDto.getMovieId())) {
+                    responseDto.setRoles(roleMovieDto.getName());
+                }
+            }
 
             for (DirectorMovieDto directorMovieDto : directorMovieDtos) {
-                if (responseDto.getId().equals(directorMovieDto.getMovieId())) {
+                if (movieId.equals(directorMovieDto.getMovieId())) {
                     responseDto.setDirector(directorMovieDto.getName());
                 }
             }

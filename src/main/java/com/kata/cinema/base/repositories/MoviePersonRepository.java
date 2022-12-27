@@ -15,6 +15,6 @@ public interface MoviePersonRepository extends JpaRepository<MoviePerson, Id> {
     List<RoleMovieDto> getRoles(List<Long> movieId);
 
     @Query(
-        "select new com.kata.cinema.base.models.dto.response.DirectorMovieDto(mp.movie.id, mp.person.firstName) from MoviePerson mp where mp.movie.id in :movieId AND mp.professions.name = 'director'")
+        "select new com.kata.cinema.base.models.dto.response.DirectorMovieDto(mp.movie.id, mp.person.firstName) from MoviePerson mp where mp.movie.id in :movieId AND mp.professions.name = 'режиссер'")
     List<DirectorMovieDto> getDirectorName(List<Long> movieId);
 }

@@ -66,7 +66,7 @@ INSERT INTO score(id, date, score, movie_id, user_id)
 VALUES (102, null, 3, 102, 100);
 
 INSERT INTO professions(id, name)
-VALUES (100, 'director');
+VALUES (100, 'режиссер');
 
 INSERT INTO professions(id, name)
 VALUES (101, 'actor');

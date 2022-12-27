@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RoleMovieDto {
     @JsonIgnore
-    Long movieId;
+    private Long movieId;
 
-    String name;
+    private String name;
 }
