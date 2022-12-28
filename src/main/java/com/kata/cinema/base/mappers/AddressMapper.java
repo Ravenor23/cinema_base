@@ -9,9 +9,9 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface AddressMapper {
 
-    AddressResponseDto toDTO(Address genre);
+    AddressResponseDto toDTO(Address address);
 
-    List<AddressResponseDto> modelsToDTO(List<Address> genres);
+    List<AddressResponseDto> modelsToDTO(List<Address> addresses);
 
     Address toEntity(AddressRequestDto addressRequestDto);
 }
